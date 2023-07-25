@@ -57,7 +57,7 @@ export default class MyGame extends Phaser.Scene {
     this.physics.add.collider(this.player, this.objectCollider,  (obj1, obj2) => {
       console.log({ obj1, obj2, property: obj2.properties })
       if(obj2.properties.winner)
-        this.game.events.emit(EventName.gameEnd, { gameStatus: gameStatus.win, level: this.scene.key })
+        this.game.events.emit(EventName.gameEnd, { gameStatus: gameStatus.win, level: 4 })
         // this.game.events.emit(EventName.gameEnd, gameStatus.win)
 
       if(this.steps.length > 0) {
