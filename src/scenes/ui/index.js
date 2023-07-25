@@ -4,11 +4,12 @@ import EventName from "../../consts/event-name";
 import GameStatus from "../../consts/game-status";
 import Text from "../../classes/text";
 import iconPlay from "../../assets/buttons/Icon_Play.png";
+import gameStatus from "../../consts/game-status";
 
 export default class UIScene extends Phaser.Scene {
   constructor() {
-    // super('ui-scene')
-    super({ key: 'ui-scene', active: true})
+    super('ui-scene')
+    // super({ key: 'ui-scene', active: true})
   }
 
   create () {
@@ -21,7 +22,7 @@ export default class UIScene extends Phaser.Scene {
     this.score.changeValue('INCREASE', 1)
     console.log({ score: this.score.getValue(), winScore: this.score.getValue() === 3 })
     if(this.score.getValue() === 3) {
-      this.game.events.emit(EventName.gameEnd, 'WIN')
+      this.game.events.emit(EventName.gameEnd, { gameStatus: gameStatus.win })
     }
   }
 
@@ -50,17 +51,23 @@ export default class UIScene extends Phaser.Scene {
       this.game.events.off(EventName.chestLoot, this.chestLootHandler)
       this.game.events.off(EventName.gameEnd, this.gameEndHandler)
       if(status === GameStatus.lose) {
-        this.scene.get(level).scene.restart()
-        this.scene.get('ui-scene').scene.restart()
-        this.scene.get('movement-scene').scene.restart()
-        // this.scene.restart()
+        if(level)
+        {
+          this.scene.get(`'level-${level}-scene'`).scene.restart()
+          this.scene.get('ui-scene').scene.restart()
+          this.scene.get('movement-scene').scene.restart()
+        }
+        else
+          this.scene.restart()
       } else {
-        this.scene.stop()
-        this.scene.remove()
+        this.scene.stop(`'level-${level}-scene'`)
+        this.scene.stop('movement-scene')
+        this.scene.stop('ui-scene')
+        // this.scene.remove(level)
 
         this.scene.start('ui-scene')
         this.scene.start('movement-scene')
-        this.scene.start('level-4-scene')
+        this.scene.start(`'level-${Number(level) + 1}-scene'`)
         // this.scene.get('movement-scene')
         // this.scene.get('ui-scene')
 
