@@ -10,11 +10,14 @@ import gameStatus from "../../consts/game-status";
 export default class MyGame extends Phaser.Scene {
   constructor() {
     super('level-1-scene');
+    this.level = 1;
+    this.winner = false;
+    this.keyMap = `map_${this.level}`
   }
 
   preload() {
     this.load.image("tiles", assetsMap);
-    this.load.tilemapTiledJSON("map_1", mapJson);
+    this.load.tilemapTiledJSON(this.keyMap, mapJson);
 
     this.load.spritesheet("player", playerPNG, {
       frameWidth: 32,
@@ -23,7 +26,7 @@ export default class MyGame extends Phaser.Scene {
   }
 
   create() {
-    this.map = this.make.tilemap({ key: "map_1" });
+    this.map = this.make.tilemap({ key:this.keyMap });
     console.log("level 1 " ,{ map: this.map })
     this.tileset = this.map.addTilesetImage("tilemap_packed", "tiles");
 
@@ -48,9 +51,11 @@ export default class MyGame extends Phaser.Scene {
     this.executeSteps = false;
     this.player = new Player(this, spawingPoint.x, spawingPoint.y)
     this.physics.add.collider(this.player, this.objectCollider,  (obj1, obj2) => {
-      console.log({ obj1, obj2, property: obj2.properties })
-      if(obj2.properties.winner)
-        this.game.events.emit(EventName.gameEnd, { gameStatus: gameStatus.win, level: 1 })
+      if(obj2.properties.winner) {
+        console.log({ obj1, obj2, property: obj2.properties })
+        this.winner = true;
+        this.game.events.emit(EventName.gameEnd, { status: gameStatus.win, level: this.level })
+      }
 
       if(this.steps.length > 0) {
         this.steps.shift();
@@ -86,12 +91,22 @@ export default class MyGame extends Phaser.Scene {
       if(this.steps.length > 0)
         this.keyPressHandler(this.steps[0])
     }
-    if(this.executeSteps && this.steps.length == 0)
+
+    if(!this.winner && this.executeSteps && this.steps.length == 0)
     {
       this.game.events.emit(EventName.executeSteps, 'STOP', { steps: [] })
       this.executeSteps = false;
       this.keyPressHandler("")
     }
+
+    if(this.winner)
+    {
+      this.game.events.emit(EventName.executeSteps, 'WAIT', { steps: [] })
+      this.executeSteps = false;
+      this.winner = false;
+      this.keyPressHandler("")
+    }
+
     
     this.player.update()
   }
