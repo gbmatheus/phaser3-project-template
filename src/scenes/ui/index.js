@@ -13,6 +13,7 @@ export default class UIScene extends Phaser.Scene {
   }
 
   create () {
+    console.log('create ui-scene ')
     this.score = new Score(this, 20, 20, 0)
     this.initListeners()
   }
@@ -22,7 +23,7 @@ export default class UIScene extends Phaser.Scene {
     this.score.changeValue('INCREASE', 1)
     console.log({ score: this.score.getValue(), winScore: this.score.getValue() === 3 })
     if(this.score.getValue() === 3) {
-      this.game.events.emit(EventName.gameEnd, { gameStatus: gameStatus.win })
+      this.game.events.emit(EventName.gameEnd, { status: gameStatus.win })
     }
   }
 
@@ -30,14 +31,16 @@ export default class UIScene extends Phaser.Scene {
     console.log({status, level})
     console.log({ game: this.game, scene: this.game.scene })
     this.cameras.main.setBackgroundColor('rgba(0,0,0,0.6)');
-    this.game.scene.pause('level-4-test')
     this.gameEndPhase = new Text(
       this,
       this.game.scale.width / 2,
       this.game.scale.height * 0.4,
       status === GameStatus.lose
         ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-        : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
+        : `PARABÉNS! VOCÊ COMPLETOU O NÍVEL ${level}!\nCLIQUE PARA INICIAR O NÍVEL ${Number(level) + 1}`
+      // status === GameStatus.lose
+      //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
+      //   : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
     )
     .setAlign('center')
     .setColor(status === GameStatus.lose ? '#ff0000' : '#ffffff')
@@ -50,28 +53,26 @@ export default class UIScene extends Phaser.Scene {
     this.input.on('pointerdown', () => {
       this.game.events.off(EventName.chestLoot, this.chestLootHandler)
       this.game.events.off(EventName.gameEnd, this.gameEndHandler)
+      this.game.events.off(EventName.executeSteps)
+      this.game.events.off(EventName.steps)
       if(status === GameStatus.lose) {
-        if(level)
-        {
-          this.scene.get(`'level-${level}-scene'`).scene.restart()
-          this.scene.get('ui-scene').scene.restart()
+          this.scene.get(`level-${Number(level)}-scene`).scene.restart()
           this.scene.get('movement-scene').scene.restart()
-        }
-        else
-          this.scene.restart()
-      } else {
-        this.scene.stop(`'level-${level}-scene'`)
-        this.scene.stop('movement-scene')
-        this.scene.stop('ui-scene')
-        // this.scene.remove(level)
+          // this.scene.restart()
+      } else if(status === GameStatus.win) {
+        console.log(`Pause - level-${Number(level)}-scene`)
+        this.game.scene.pause(`level-${Number(level)}-scene`)
+        this.game.scene.pause('movement-scene')
+        
+        console.log(`Stop - level-${Number(level)}-scene`)
+        // this.scene.stop(`level-${Number(level)}-scene`)
+        this.scene.get(`level-${Number(level)}-scene`).scene.stop()
 
-        this.scene.start('ui-scene')
-        this.scene.start('movement-scene')
-        this.scene.start(`'level-${Number(level) + 1}-scene'`)
-        // this.scene.get('movement-scene')
-        // this.scene.get('ui-scene')
-
+        console.log(`Start - level-${Number(level) + 1}-scene`)
+        this.scene.get(`level-${Number(level) + 1}-scene`).scene.start()
+        this.scene.get('movement-scene').scene.restart()        
       }
+      this.scene.restart()
     })
   }
 
