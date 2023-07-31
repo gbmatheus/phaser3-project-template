@@ -25,7 +25,7 @@ export default class MainMenuScene extends Phaser.Scene {
     })
 
     const { width, height } = this.scale
-    console.log({ width, height })
+    console.log('main-game-scene ', { width, height })
 
     // play button
     const playButton = this.add.image(width * 0.5, height * 0.6, 'glass_panel').setDisplaySize(150, 50)

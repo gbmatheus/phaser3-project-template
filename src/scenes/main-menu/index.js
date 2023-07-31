@@ -30,7 +30,7 @@ export default class MainMenuScene extends Phaser.Scene {
     })
 
     const { width, height } = this.scale
-    console.log({ width, height })
+    console.log('main-menu-scene ', { width, height })
 
     this.add.image(width * 0.5, height * 0.5, 'background').setOrigin(0.5)
 
@@ -53,7 +53,7 @@ export default class MainMenuScene extends Phaser.Scene {
     const helpButton = this.add.image(creditsButton.x, creditsButton.y + creditsButton.displayHeight + 10, 'glass_panel')
       .setDisplaySize(150, 50)
       // .setInteractive({pixelPerfect: true})
-    this.add.text(helpButton.x, helpButton.y, 'Ajuda').setOrigin(0.5)
+    this.add.text(helpButton.x, helpButton.y, 'Tutorial').setOrigin(0.5)
 
     this.buttons.push(playButton)
     // this.buttons.push(helpButton)

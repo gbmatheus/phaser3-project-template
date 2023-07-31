@@ -44,7 +44,7 @@ export default class MainMenuScene extends Phaser.Scene {
   create() {
     const { width, height } = this.scale;
     const scaleButton = 0.2;
-    console.log({ width, height });
+    console.log('movement-scene ', { width, height })
 
     // mapa - 640 x 480
     // zona de largar o botão
@@ -481,7 +481,7 @@ export default class MainMenuScene extends Phaser.Scene {
     if (this.executeStepsStatus == "STOP" && this.steps.length === 0) {
       this.stepsImageObject.getChildren().forEach((image) => {
         image.destroy();
-        this.game.events.emit(EventName.gameEnd, { gameStatus: gameStatus.lose })
+        this.game.events.emit(EventName.gameEnd, { status: gameStatus.lose })
       });
 
       if (this.stepsImageObject.getChildren().length === 0)

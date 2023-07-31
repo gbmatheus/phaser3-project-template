@@ -8,7 +8,7 @@ import cursorHand from "../../assets/ui-pack/cursor_hand.png";
 
 export default class MainMenuScene extends Phaser.Scene {
   constructor() {
-    super('main-menu-scene')
+    super('main-menu-scene-2')
     this.buttons = []
     this.selectButtonIndex = 0
   }
@@ -28,7 +28,7 @@ export default class MainMenuScene extends Phaser.Scene {
     })
 
     const { width, height } = this.scale
-    console.log({ width, height })
+    console.log('main-menu-scene-2 ', { width, height })
 
     // play button
     const playButton = this.add.image(width * 0.5, height * 0.6, 'glass_panel').setDisplaySize(150, 50)
