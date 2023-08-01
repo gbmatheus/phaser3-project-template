@@ -19,7 +19,7 @@
         }, 
         {
          "compression":"",
-         "data":"AgAAAAMAAAADAAAABwAAAAMAAAADAAAAAwAAAAcAAAADAAAAAwAAAAMAAAADAAAABwAAAAMAAAADAAAAAwAAAAcAAAADAAAAAwAAAAQAAAAOAAAADwAAACkAAAATAAAAKQAAACkAAAApAAAAEwAAACkAAAApAAAACgAAACkAAAATAAAAKQAAACkAAAApAAAAEwAAACkAAAAPAAAAEAAAAA4AAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAQAAAADgAAAEAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAAAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAABAAAAAOAAAAQAAAAEAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAEAAAAA4AAABAAAAAQAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAEAAAAAAAAAAQAAAAEAAAABAAAAAAAAAAAAAAABAAAAAQAAAAEAAAAAQAAAADgAAAEAAAABAAAAAQAAAAAAAAABAAAAAAAAAAEAAAABAAAAAQAAAAAAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAEAAAABAAAAAQAAAABAAAAAOAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAEAAAAAAAAAAQAAAAEAAAABAAAAAEAAAAA4AAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAQAAAADgAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAABAAAAAOAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAEAAAAA4AAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAQAAAADgAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAABAAAAAOAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAEAAAABoAAAAbAAAAGwAAABsAAAAbAAAAGwAAABsAAAAbAAAAGwAAABsAAAAbAAAAGwAAABsAAAAbAAAAGwAAABsAAAAbAAAAGwAAABsAAAAcAAAA",
+         "data":"AgAAAAMAAAADAAAABwAAAAMAAAADAAAAAwAAAAcAAAADAAAAAwAAAAMAAAADAAAABwAAAAMAAAADAAAAAwAAAAcAAAADAAAAAwAAAAQAAAAOAAAADwAAACkAAAATAAAAKQAAAAoAAAApAAAAEwAAACkAAAApAAAAKQAAACkAAAATAAAAKQAAACkAAAApAAAAEwAAACkAAAAPAAAAEAAAAA4AAABAAAAAQAAAAEAAAABAAAAAAAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAQAAAADgAAAEAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAABAAAAAOAAAAQAAAAEAAAABAAAAAQAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAEAAAAA4AAABAAAAAQAAAAEAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAABAAAAAQAAAAEAAAAAQAAAADgAAAEAAAABAAAAAQAAAAEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAABAAAAAOAAAAQAAAAEAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAEAAAABAAAAAEAAAAA4AAABAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAEAAAABAAAAAQAAAAEAAAAAAAAAAQAAAAEAAAAAQAAAADgAAAEAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAAAAAABAAAAAQAAAABAAAAAOAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAEAAAAA4AAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAQAAAADgAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAABAAAAAOAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAEAAAABoAAAAbAAAAGwAAABsAAAAbAAAAGwAAABsAAAAbAAAAGwAAABsAAAAbAAAAGwAAABsAAAAbAAAAGwAAABsAAAAbAAAAGwAAABsAAAAcAAAA",
          "encoding":"base64",
          "height":15,
          "id":3,
@@ -32,34 +32,11 @@
          "y":0
         }, 
         {
+         "class":"reward",
          "draworder":"topdown",
          "id":4,
          "name":"reward",
          "objects":[
-                {
-                 "height":0,
-                 "id":1,
-                 "name":"reward",
-                 "point":true,
-                 "rotation":0,
-                 "type":"reward",
-                 "visible":true,
-                 "width":0,
-                 "x":144,
-                 "y":208
-                }, 
-                {
-                 "height":0,
-                 "id":2,
-                 "name":"reward",
-                 "point":true,
-                 "rotation":0,
-                 "type":"reward",
-                 "visible":true,
-                 "width":0,
-                 "x":208,
-                 "y":240
-                }, 
                 {
                  "height":0,
                  "id":4,
@@ -69,8 +46,32 @@
                  "type":"reward",
                  "visible":true,
                  "width":0,
-                 "x":304,
-                 "y":336
+                 "x":208,
+                 "y":304
+                }, 
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"reward",
+                 "point":true,
+                 "rotation":0,
+                 "type":"reward",
+                 "visible":true,
+                 "width":0,
+                 "x":368,
+                 "y":304
+                }, 
+                {
+                 "height":0,
+                 "id":6,
+                 "name":"reward",
+                 "point":true,
+                 "rotation":0,
+                 "type":"reward",
+                 "visible":true,
+                 "width":0,
+                 "x":336,
+                 "y":144
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -79,21 +80,34 @@
          "y":0
         }, 
         {
+         "class":"enemy",
          "draworder":"topdown",
          "id":5,
+         "name":"enemy",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "class":"player",
+         "draworder":"topdown",
+         "id":6,
          "name":"player",
          "objects":[
                 {
                  "height":0,
-                 "id":5,
+                 "id":1,
                  "name":"spawing_point",
                  "point":true,
                  "rotation":0,
                  "type":"spawing_point",
                  "visible":true,
                  "width":0,
-                 "x":496,
-                 "y":144
+                 "x":528,
+                 "y":208
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -115,8 +129,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":6,
+ "nextlayerid":7,
+ "nextobjectid":7,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
@@ -252,7 +266,7 @@
                         {
                          "name":"collider",
                          "type":"bool",
-                         "value":true
+                         "value":false
                         }, 
                         {
                          "name":"winner",

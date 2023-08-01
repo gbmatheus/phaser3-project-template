@@ -2,15 +2,22 @@ import Phaser from "phaser";
 import assetsMap from "../../assets/tilemap_packed.png";
 import mapJson from "../../assets/map-01.json";
 import playerPNG from "../../assets/player.png";
+import Player from "../../classes/player";
+import direction from "../../consts/direction";
+import EventName from "../../consts/event-name";
+import gameStatus from "../../consts/game-status";
 
 export default class MyGame extends Phaser.Scene {
   constructor() {
     super('level-1-scene');
+    this.level = 1;
+    this.winner = false;
+    this.keyMap = `map_${this.level}`
   }
 
   preload() {
     this.load.image("tiles", assetsMap);
-    this.load.tilemapTiledJSON("map", mapJson);
+    this.load.tilemapTiledJSON(this.keyMap, mapJson);
 
     this.load.spritesheet("player", playerPNG, {
       frameWidth: 32,
@@ -19,80 +26,58 @@ export default class MyGame extends Phaser.Scene {
   }
 
   create() {
-    const map = this.make.tilemap({ key: "map" });
-    const tileset = map.addTilesetImage("tilemap_packed", "tiles");
+    this.map = this.make.tilemap({ key:this.keyMap });
+    console.log("level 1 " ,{ map: this.map })
+    this.tileset = this.map.addTilesetImage("tilemap_packed", "tiles");
 
-    const ground = map.createLayer("ground", tileset, 0, 0);
-    const objectCollider = map.createLayer("objectCollider", tileset, 0, 0);
-    const aboveObject = map.createLayer("aboveObject", tileset, 0, 0);
+    this.ground = this.map.createLayer("ground", this.tileset, 0, 0);
+    this.objectCollider = this.map.createLayer("objectCollider", this.tileset, 0, 0);
+    this.aboveObject = this.map.createLayer("aboveObject", this.tileset, 0, 0);
 
     // atribuida a colisão pela propriedade definida no map.json
-    objectCollider.setCollisionByProperty({ collider: true });
+    this.objectCollider.setCollisionByProperty({ collider: true });
+    this.objectCollider.setCollisionByProperty({ winner: true });
     
-    objectCollider.setDepth(10);
+    this.objectCollider.setDepth(10);
 
     // player
-    const spawingPoint = map.findObject(
+    const spawingPoint = this.map.findObject(
       "player",
       (obj) => obj.name === "spawing_point"
     );
     console.log({ spawingPoint });
 
-    this.player = this.physics.add.sprite(
-      spawingPoint.x,
-      spawingPoint.y,
-      "player"
-    );
-    this.player.setSize(30, 30)
-    console.log({ player: this.player });
+    this.steps = []
+    this.executeSteps = false;
+    this.player = new Player(this, spawingPoint.x, spawingPoint.y)
+    this.physics.add.collider(this.player, this.objectCollider,  (obj1, obj2) => {
+      if(obj2.properties.winner) {
+        console.log({ obj1, obj2, property: obj2.properties })
+        this.winner = true;
+        this.game.events.emit(EventName.gameEnd, { status: gameStatus.win, level: this.level })
+      }
 
-    // adicionado fisica de colisão
-    this.physics.add.collider(this.player, objectCollider);
-    
-    // animations
-    const animate = this.anims;
-    animate.create({
-      key: "left",
-      frames: animate.generateFrameNames("player", { start: 3, end: 5 }),
-      frameRate: 10,
-      repeat: -1,
-    });
+      if(this.steps.length > 0) {
+        this.steps.shift();
+      }
+    })
 
-    animate.create({
-      key: "right",
-      frames: animate.generateFrameNames("player", { start: 6, end: 8 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    animate.create({
-      key: "front",
-      frames: animate.generateFrameNames("player", { start: 0, end: 2 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    animate.create({
-      key: "back",
-      frames: animate.generateFrameNames("player", { start: 9, end: 11 }),
-      frameRate: 10,
-      repeat: -1,
-    });
+    this.initListeners()
 
     // camera
     const camera = this.cameras.main;
     // A camera vai seguir o personagem
     camera.startFollow(this.player);
     // Atribui um valor para a camera do mapa
-    camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
-    this.input.keyboard.once("keydown-D", (event) => {
+    this.input.keyboard.once("keydown-H", (event) => {
       // Turn on physics debugging to show player's hitbox
       this.physics.world.createDebugGraphic();
 
       // Create worldLayer collision graphic above the player, but below the help text
       const graphics = this.add.graphics().setAlpha(0.75).setDepth(20);
-      objectCollider.renderDebug(graphics, {
+      this.objectCollider.renderDebug(graphics, {
         tileColor: null, // Color of non-colliding tiles
         collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
         faceColor: new Phaser.Display.Color(40, 39, 37, 255), // Color of colliding face edges
@@ -101,45 +86,66 @@ export default class MyGame extends Phaser.Scene {
   }
 
   update() {
-    this.prevVelocity = this.player.body.velocity.clone();
-
-    this.player.setVelocity(0);
-    this.cursor = this.input.keyboard.createCursorKeys();
-    // console.log({ cursor: this.cursor })
-
-    if (this.cursor.left.isDown) {
-      this.player.body.setVelocityX(-100);
-    } else if (this.cursor.right.isDown) {
-      this.player.body.setVelocityX(100);
-    } else if (this.cursor.up.isDown) {
-      this.player.body.setVelocityY(-100);
-    } else if (this.cursor.down.isDown) {
-      this.player.body.setVelocityY(100);
+    if(this.executeSteps) 
+    {
+      if(this.steps.length > 0)
+        this.keyPressHandler(this.steps[0])
     }
 
-    if (this.cursor.left.isDown) {
-      this.player.anims.play("left", true);
-    } else if (this.cursor.right.isDown) {
-      this.player.anims.play("right", true);
-    } else if (this.cursor.up.isDown) {
-      this.player.anims.play("back", true);
-    } else if (this.cursor.down.isDown) {
-      this.player.anims.play("front", true);
-    } else {
-      this.player.anims.stop();
-
-      if (this.prevVelocity.x < 0) this.player.setTexture("player", "left");
-      else if (this.prevVelocity.x > 0)
-        this.player.setTexture("player", "right");
-      else if (this.prevVelocity.y < 0)
-        this.player.setTexture("player", "back");
-      else if (this.prevVelocity.y > 0)
-        this.player.setTexture("player", "front");
+    if(!this.winner && this.executeSteps && this.steps.length == 0)
+    {
+      this.game.events.emit(EventName.executeSteps, 'STOP', { steps: [] })
+      this.executeSteps = false;
+      this.keyPressHandler("")
     }
+
+    if(this.winner)
+    {
+      this.game.events.emit(EventName.executeSteps, 'WAIT', { steps: [] })
+      this.executeSteps = false;
+      this.winner = false;
+      this.keyPressHandler("")
+    }
+
+    
+    this.player.update()
   }
 
   // Definir um point para definir a parta como fim do nível
   levelCompleted(player, goal) {
     this.scene.restart();
+  }
+  
+  executeStepsHandler (event, { steps })
+  {
+    console.log("executeStepsHandler " + event)
+    if(event === "EXECUTE") {
+        this.steps = steps
+        console.log(steps)
+        this.executeSteps = true;
+    }
+  }
+
+  keyPressHandler (key) {
+    this.player.keyUp.isDown = false
+    this.player.keyDown.isDown = false
+    this.player.keyLeft.isDown = false
+    this.player.keyRight.isDown = false
+
+    if (key === direction.up) 
+      this.player.keyUp.isDown = true
+
+    if (key === direction.down) 
+      this.player.keyDown.isDown = true
+
+    if (key === direction.left) 
+      this.player.keyLeft.isDown = true
+
+    if (key === direction.right) 
+      this.player.keyRight.isDown = true
+  }
+
+  initListeners() {
+    this.game.events.on(EventName.executeSteps, this.executeStepsHandler, this)
   }
 }

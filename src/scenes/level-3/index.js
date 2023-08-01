@@ -1,18 +1,19 @@
 import Phaser from "phaser";
 import assetsMap from "../../assets/tilemap_packed.png";
-import mapJson from "../../assets/map-02.json";
+import mapJson from "../../assets/map-04.json";
 import playerPNG from "../../assets/player.png";
 import Player from "../../classes/player";
 import EventName from "../../consts/event-name";
+import Enemy from "../../classes/enemy";
 import direction from "../../consts/direction";
 import gameStatus from "../../consts/game-status";
 
 export default class MyGame extends Phaser.Scene {
   constructor() {
-    super('level-2-scene');
-    this.level = 2;
-    this.winner = false;
+    super('level-3-scene');
+    this.level = 3;
     this.keyMap = `map_${this.level}`
+    this.winner = false;
   }
 
   preload() {
@@ -34,7 +35,7 @@ export default class MyGame extends Phaser.Scene {
     this.map = this.make.tilemap({ key:this.keyMap });
     this.tileset = this.map.addTilesetImage("tilemap_packed", "tiles");
 
-    console.log("level 2 ", { map: this.map, game: this.game })
+    console.log("level 3 ", { map: this.map, game: this.game })
     
     this.ground = this.map.createLayer("ground", this.tileset, 0, 0);
     this.objectCollider = this.map.createLayer("objectCollider", this.tileset, 0, 0);
@@ -70,6 +71,7 @@ export default class MyGame extends Phaser.Scene {
     
     this.initReward()
     this.initListeners()
+    
 
     // camera
     const camera = this.cameras.main;
@@ -92,7 +94,6 @@ export default class MyGame extends Phaser.Scene {
     });
   }
 
-  
   update() {
     if(this.executeSteps) 
     {
@@ -115,6 +116,7 @@ export default class MyGame extends Phaser.Scene {
       this.keyPressHandler("")
     }
 
+    
     this.player.update()
   }
 
