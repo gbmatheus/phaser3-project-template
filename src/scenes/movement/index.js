@@ -3,6 +3,7 @@ import Score from "../../classes/score";
 import EventName from "../../consts/event-name";
 import DirectionPlayer from "../../consts/direction";
 import Text from "../../classes/text";
+import ReturnButton from "../../assets/buttons/Icon_Return.png";
 import ArrowUp from "../../assets/buttons/Icon_ArrowUp.png";
 import ArrowDown from "../../assets/buttons/Icon_ArrowDown.png";
 import ArrowLeft from "../../assets/buttons/Icon_ArrowLeft.png";
@@ -31,6 +32,7 @@ export default class MainMenuScene extends Phaser.Scene {
   }
 
   preload() {
+    this.load.image("arrow_restart", ReturnButton);
     this.load.image("arrow_up", ArrowUp);
     this.load.image("arrow_down", ArrowDown);
     this.load.image("arrow_left", ArrowLeft);
@@ -55,8 +57,18 @@ export default class MainMenuScene extends Phaser.Scene {
     const stepsContainerImage = this.add.image(0, zoneImage.y + zoneImage.displayHeight + 20, 'steps_zone').setDisplaySize(736, 80).setOrigin(0)
     zoneImage.input.dropZone = true;
 
+    const iconReturn = this.add
+    .image(640, 48, "arrow_restart")
+    .setScale(scaleButton);
+    iconReturn.setName("restart");
+    iconReturn.setInteractive();
+    iconReturn.on("pointerup", () => {
+      // this.scene.restart()
+      this.game.events.emit(EventName.gameEnd, { status: gameStatus.restart })
+    })
+
     this.stepsImageObject = this.add.group();
-    
+
     let moveIcon = false;
     const iconArrowUp = this.add
       .image(0, 0, "arrow_up")

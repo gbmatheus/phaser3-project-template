@@ -40,25 +40,25 @@ export default class MainMenuScene extends Phaser.Scene {
       .setInteractive({pixelPerfect: true})
     this.add.text(playButton.x, playButton.y, 'Jogar').setOrigin(0.5)
 
-    const settigsButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'glass_panel')
-      .setDisplaySize(150, 50)
-      // .setInteractive({pixelPerfect: true})
-    this.add.text(settigsButton.x, settigsButton.y, 'Configurações').setOrigin(0.5)
-
-    const creditsButton = this.add.image(settigsButton.x, settigsButton.y + settigsButton.displayHeight + 10, 'glass_panel')
-      .setDisplaySize(150, 50)
-      // .setInteractive({pixelPerfect: true})
-    this.add.text(creditsButton.x, creditsButton.y, 'Créditos').setOrigin(0.5)
-
-    const helpButton = this.add.image(creditsButton.x, creditsButton.y + creditsButton.displayHeight + 10, 'glass_panel')
+    const helpButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'glass_panel')
       .setDisplaySize(150, 50)
       // .setInteractive({pixelPerfect: true})
     this.add.text(helpButton.x, helpButton.y, 'Tutorial').setOrigin(0.5)
 
+    // const creditsButton = this.add.image(helpButton.x, helpButton.y + helpButton.displayHeight + 10, 'glass_panel')
+    //   .setDisplaySize(150, 50)
+    //   // .setInteractive({pixelPerfect: true})
+    // this.add.text(creditsButton.x, creditsButton.y, 'Créditos').setOrigin(0.5)
+
+    // const settigsButton = this.add.image(creditsButton.x, creditsButton.y + creditsButton.displayHeight + 10, 'glass_panel')
+    //   .setDisplaySize(150, 50)
+    //   // .setInteractive({pixelPerfect: true})
+    // this.add.text(settigsButton.x, settigsButton.y, 'Configurações').setOrigin(0.5)
+
     this.buttons.push(playButton)
-    // this.buttons.push(helpButton)
-    this.buttons.push(settigsButton)
-    this.buttons.push(creditsButton)
+    this.buttons.push(helpButton)
+    // this.buttons.push(settigsButton)
+    // this.buttons.push(creditsButton)
 
     // this.buttonSelector = this.add.image(0, 0, 'cursor_hand')
 
@@ -80,20 +80,20 @@ export default class MainMenuScene extends Phaser.Scene {
       this.scene.start('loading-scene')
     })
 
-    settigsButton.on('selected', () => {
+    helpButton.on('selected', () => {
       console.log("settings")
     }).on('pointerdown', () => {
       console.log("settings click")
-      settigsButton.setTint(0x66ff7f)
+      helpButton.setTint(0x66ff7f)
     }).on('pointerover', () => {
       console.log("settings over")
-      settigsButton.setTint(0xff0000);
+      helpButton.setTint(0xff0000);
     }).on('pointerout', () => {
       console.log("settings out")
-      settigsButton.setTint();
+      helpButton.setTint();
     })
 
-    // settigsButton.on('pointerdown', () => [
+    // helpButton.on('pointerdown', () => [
     //   console.log("settings")
     // ])
     

@@ -1,4 +1,5 @@
 export default {
   win: 'WIN',
-  lose: 'LOSE'
+  lose: 'LOSE',
+  restart: 'RESTART',
 }
