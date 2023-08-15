@@ -42,7 +42,7 @@ export default class MainMenuScene extends Phaser.Scene {
 
     const helpButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'glass_panel')
       .setDisplaySize(150, 50)
-      // .setInteractive({pixelPerfect: true})
+      .setInteractive({pixelPerfect: true})
     this.add.text(helpButton.x, helpButton.y, 'Tutorial').setOrigin(0.5)
 
     // const creditsButton = this.add.image(helpButton.x, helpButton.y + helpButton.displayHeight + 10, 'glass_panel')
@@ -97,18 +97,18 @@ export default class MainMenuScene extends Phaser.Scene {
     //   console.log("settings")
     // ])
     
-    creditsButton.on('selected', () => {
-      console.log("credits")
-    }).on('pointerdown', () => {
-      console.log("credits click")
-      creditsButton.setTint(0x66ff7f)
-    }).on('pointerover', () => {
-      console.log("credits over")
-      creditsButton.setTint(0xff0000);
-    }).on('pointerout', () => {
-      console.log("credits out")
-      creditsButton.setTint();
-    })
+    // creditsButton.on('selected', () => {
+    //   console.log("credits")
+    // }).on('pointerdown', () => {
+    //   console.log("credits click")
+    //   creditsButton.setTint(0x66ff7f)
+    // }).on('pointerover', () => {
+    //   console.log("credits over")
+    //   creditsButton.setTint(0xff0000);
+    // }).on('pointerout', () => {
+    //   console.log("credits out")
+    //   creditsButton.setTint();
+    // })
   }
 
   // selectButton(index) {
