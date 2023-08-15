@@ -10,6 +10,7 @@ export default class UIScene extends Phaser.Scene {
   constructor() {
     super('ui-scene')
     // super({ key: 'ui-scene', active: true})
+    this.level = 1;
   }
 
   create () {
@@ -30,6 +31,16 @@ export default class UIScene extends Phaser.Scene {
   gameEndHandler ({status, level}) {
     console.log({status, level})
     console.log({ game: this.game, scene: this.game.scene })
+    
+    if(this.level !== 1)
+      this.level = Number(level)
+    if(status === GameStatus.restart) {
+        console.log(`Restart - level-${Number(level)}-scene`)
+        this.scene.get(`level-${Number(this.level)}-scene`).scene.start()
+        this.scene.get('movement-scene').scene.restart()        
+        this.scene.restart()
+    }
+
     this.cameras.main.setBackgroundColor('rgba(0,0,0,0.6)');
     this.gameEndPhase = new Text(
       this,
@@ -50,19 +61,22 @@ export default class UIScene extends Phaser.Scene {
       this.game.scale.height * 0.4,
     )
 
+    this.game.scene.pause(`level-${Number(level)}-scene`)
+    this.game.scene.pause('movement-scene')
+
     this.input.on('pointerdown', () => {
       this.game.events.off(EventName.chestLoot, this.chestLootHandler)
       this.game.events.off(EventName.gameEnd, this.gameEndHandler)
       this.game.events.off(EventName.executeSteps)
       this.game.events.off(EventName.steps)
       if(status === GameStatus.lose) {
-          this.scene.get(`level-${Number(level)}-scene`).scene.restart()
+          this.scene.get(`level-${Number(this.level)}-scene`).scene.restart()
           this.scene.get('movement-scene').scene.restart()
           // this.scene.restart()
       } else if(status === GameStatus.win) {
         console.log(`Pause - level-${Number(level)}-scene`)
-        this.game.scene.pause(`level-${Number(level)}-scene`)
-        this.game.scene.pause('movement-scene')
+        // this.game.scene.pause(`level-${Number(level)}-scene`)
+        // this.game.scene.pause('movement-scene')
         
         console.log(`Stop - level-${Number(level)}-scene`)
         // this.scene.stop(`level-${Number(level)}-scene`)
