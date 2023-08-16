@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import Score from "../../classes/score";
+import StepsCount from "../../classes/steps";
 import EventName from "../../consts/event-name";
 import DirectionPlayer from "../../consts/direction";
 import Text from "../../classes/text";
@@ -19,11 +19,12 @@ import gameStatus from "../../consts/game-status";
 export default class MainMenuScene extends Phaser.Scene {
   constructor() {
     super("movement-scene");
-    // super({ key: "movement-scene", active: true });
+    super({ key: "movement-scene", active: true });
     // super({ key: "movement-scene", active: true, visible: false });
     this.buttons = [];
     this.selectButtonIndex = 0;
     this.steps = [];
+    this.stepsLimit = 11;
     this.executeStepsStatus = "WAIT";
   }
 
@@ -44,6 +45,8 @@ export default class MainMenuScene extends Phaser.Scene {
   }
 
   create() {
+    this.stepsCount = new StepsCount(this, 448, 0, 0, this.stepsLimit).setOrigin(0.5)
+
     const { width, height } = this.scale;
     const scaleButton = 0.2;
     console.log('movement-scene ', { width, height })
@@ -94,6 +97,7 @@ export default class MainMenuScene extends Phaser.Scene {
         this.steps.push(iconArrowUp.name);
         // this.stepsImageObject.add(stepImageObject.getChildren())
         this.stepsImageObject.add(stepImageObject);
+        this.stepsCount.changeValue('INCREASE', 1)
         console.log("stepsImageObject after add step ", {
           stepsImageObject: this.stepsImageObject.getChildren(),
         });
@@ -109,6 +113,8 @@ export default class MainMenuScene extends Phaser.Scene {
           let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
           let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
           stepImageObject.destroy();
+          this.stepsCount.changeValue('DECREASE', 1)
+
           for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
             if(this.stepsImageObject.getChildren()[index])
             {
@@ -154,6 +160,8 @@ export default class MainMenuScene extends Phaser.Scene {
         this.steps.push(iconArrowDown.name);
         // this.stepsImageObject.add(stepImageObject.getChildren())
         this.stepsImageObject.add(stepImageObject);
+        this.stepsCount.changeValue('INCREASE', 1)
+
         console.log("stepsImageObject after add step ", {
           stepsImageObject: this.stepsImageObject.getChildren(),
         });
@@ -169,6 +177,8 @@ export default class MainMenuScene extends Phaser.Scene {
           let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
           let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
           stepImageObject.destroy();
+          this.stepsCount.changeValue('DECREASE', 1)
+
           for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
             if(this.stepsImageObject.getChildren()[index])
             {
@@ -214,6 +224,8 @@ export default class MainMenuScene extends Phaser.Scene {
         this.steps.push(iconArrowLeft.name);
         // this.stepsImageObject.add(stepImageObject.getChildren())
         this.stepsImageObject.add(stepImageObject);
+        this.stepsCount.changeValue('INCREASE', 1)
+
         console.log("stepsImageObject after add step ", {
           stepsImageObject: this.stepsImageObject.getChildren(),
         });
@@ -229,6 +241,8 @@ export default class MainMenuScene extends Phaser.Scene {
           let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
           let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
           stepImageObject.destroy();
+          this.stepsCount.changeValue('DECREASE', 1)
+
           for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
             if(this.stepsImageObject.getChildren()[index])
             {
@@ -274,6 +288,8 @@ export default class MainMenuScene extends Phaser.Scene {
         this.steps.push(iconArrowRight.name);
         // this.stepsImageObject.add(stepImageObject.getChildren())
         this.stepsImageObject.add(stepImageObject);
+        this.stepsCount.changeValue('INCREASE', 1)
+
         console.log("stepsImageObject after add step ", {
           stepsImageObject: this.stepsImageObject.getChildren(),
         });
@@ -289,6 +305,8 @@ export default class MainMenuScene extends Phaser.Scene {
           let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
           let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
           stepImageObject.destroy();
+          this.stepsCount.changeValue('DECREASE', 1)
+
           for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
             if(this.stepsImageObject.getChildren()[index])
             {
@@ -331,6 +349,7 @@ export default class MainMenuScene extends Phaser.Scene {
         iconArrowRight.x + iconArrowRight.displayWidth + 64, iconArrowRight.y,
         "trash").setOrigin(0.5)
       .setScale(scaleButton);
+    console.log("iconDelete ",{ x: iconDelete.x + iconDelete.displayWidth + 64, y: iconDelete.y })
     iconDelete.setName("delete");
     iconDelete.setInteractive({ pixelPerfect: true });
     iconDelete
@@ -345,7 +364,8 @@ export default class MainMenuScene extends Phaser.Scene {
       .on("pointerdown", () => {
         console.log("delete click");
         iconDelete.setTint(0x66ff7f);
-        this.game.events.emit(EventName.executeSteps, "STOP", { steps: [] });
+        this.stepsCount.changeValue('SET_VALUE', 0)
+        this.game.events.emit(EventName.executeSteps, "RESTART", { steps: [] });
         // this.scene.start('loading-scene')
       });
 
@@ -361,7 +381,8 @@ export default class MainMenuScene extends Phaser.Scene {
       iconArrowDown,
       iconArrowLeft,
       iconArrowRight,
-      iconDelete
+      iconDelete,
+      this.stepsCount
     ]);
 
     this.input.on("dragstart", (pointer, gameObject) => {
@@ -426,6 +447,8 @@ export default class MainMenuScene extends Phaser.Scene {
       this.steps.push(gameObject.name);
       // this.stepsImageObject.add(stepImageObject.getChildren())
       this.stepsImageObject.add(stepImageObject);
+      this.stepsCount.changeValue('INCREASE', 1)
+
       console.log("stepsImageObject after add step ", {
         stepsImageObject: this.stepsImageObject.getChildren(),
       });
@@ -445,6 +468,8 @@ export default class MainMenuScene extends Phaser.Scene {
         let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
         let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
         stepImageObject.destroy();
+        this.stepsCount.changeValue('DECREASE', 1)
+
         for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
           if(this.stepsImageObject.getChildren()[index])
           {
@@ -483,6 +508,11 @@ export default class MainMenuScene extends Phaser.Scene {
       this.steps = [];
       this.executeStepsStatus = "STOP";
     }
+    
+    if (event === "RESTART") {
+      this.steps = [];
+      this.executeStepsStatus = "RESTART";
+    }
   }
 
   initListeners() {
@@ -494,6 +524,15 @@ export default class MainMenuScene extends Phaser.Scene {
       this.stepsImageObject.getChildren().forEach((image) => {
         image.destroy();
         this.game.events.emit(EventName.gameEnd, { status: gameStatus.lose })
+      });
+
+      if (this.stepsImageObject.getChildren().length === 0)
+        this.executeStepsStatus = "WAIT";
+    }
+
+     if (this.executeStepsStatus == "RESTART" && this.steps.length === 0) {
+      this.stepsImageObject.getChildren().forEach((image) => {
+        image.destroy();
       });
 
       if (this.stepsImageObject.getChildren().length === 0)
