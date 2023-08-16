@@ -79,6 +79,13 @@ export default class MainMenuScene extends Phaser.Scene {
       playButton.setTint(0x66ff7f)
       this.scene.start('loading-scene')
     })
+    this.add.text(playButton.x, playButton.y, 'JOGAR 1').setTint(0x66ff2f).setOrigin(0.5, 0)
+    this.add.text(playButton.x, playButton.y, 'JOGAR 3').setTint(0x66ff).setOrigin(0.5, 0.2)
+    this.add.text(playButton.x, playButton.y, 'JOGAR 4').setTint(0x662f7f).setOrigin(0.5, 0.5)
+    this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.7)
+    this.add.text(playButton.x, playButton.y, 'JOGAR 6').setTint(0xf7f).setOrigin(0.5, 1)
+    
+
 
     helpButton.on('selected', () => {
       console.log("settings")
