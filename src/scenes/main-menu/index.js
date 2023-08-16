@@ -38,12 +38,12 @@ export default class MainMenuScene extends Phaser.Scene {
     const playButton = this.add.image(width * 0.5, height * 0.6, 'glass_panel')
       .setDisplaySize(150, 50)
       .setInteractive({pixelPerfect: true})
-    this.add.text(playButton.x, playButton.y, 'Jogar', { align: 'left' })
+    this.add.text(playButton.x, playButton.y, 'JOGAR').setOrigin(0.5, 0.25)
 
     const helpButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'glass_panel')
       .setDisplaySize(150, 50)
       .setInteractive({pixelPerfect: true})
-    this.add.text(helpButton.x, helpButton.y, 'Tutorial').setOrigin(0.5)
+    this.add.text(helpButton.x, helpButton.y, 'TUTORIAL').setOrigin(0.5, 0.1)
 
     // const creditsButton = this.add.image(helpButton.x, helpButton.y + helpButton.displayHeight + 10, 'glass_panel')
     //   .setDisplaySize(150, 50)
