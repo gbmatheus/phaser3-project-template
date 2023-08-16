@@ -79,11 +79,24 @@ export default class MainMenuScene extends Phaser.Scene {
       playButton.setTint(0x66ff7f)
       this.scene.start('loading-scene')
     })
-    this.add.text(playButton.x, playButton.y, 'JOGAR 1').setTint(0x66ff2f).setOrigin(0.5, 0)
-    this.add.text(playButton.x, playButton.y, 'JOGAR 3').setTint(0x66ff).setOrigin(0.5, 0.2)
-    this.add.text(playButton.x, playButton.y, 'JOGAR 4').setTint(0x662f7f).setOrigin(0.5, 0.5)
-    this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.7)
-    this.add.text(playButton.x, playButton.y, 'JOGAR 6').setTint(0xf7f).setOrigin(0.5, 1)
+
+    
+    const JOGAR1 = this.add.text(playButton.x, playButton.y, 'JOGAR 1').setTint(0x66ff2f).setOrigin(0.5, 0)
+    const JOGAR3 = this.add.text(playButton.x, playButton.y, 'JOGAR 3').setTint(0x66ff).setOrigin(0.5, 0.2)
+    const JOGAR4 = this.add.text(playButton.x, playButton.y, 'JOGAR 4').setTint(0x662f7f).setOrigin(0.5, 0.5)
+    const JOGAR5 = this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.7)
+    const JOGAR6 = this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.6)
+    const JOGAR7 = this.add.text(playButton.x, playButton.y, 'JOGAR 6').setTint(0xf7f).setOrigin(0.5, 1)
+
+    this.add.container(playButton.x, playButton.y [
+      playButton,
+      JOGAR1,
+      JOGAR3,
+      JOGAR4,
+      JOGAR5,
+      JOGAR6,
+      JOGAR7
+    ]);
     
 
 
