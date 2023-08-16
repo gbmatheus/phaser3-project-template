@@ -1,10 +1,10 @@
 import Phaser, { GameObjects } from "phaser";
 
 export default class Text extends GameObjects.Text {
-  constructor(scene, x, y, text) {
+  constructor(scene, x, y, text, fontSize = '2rem') {
     console.log(scene)
     super(scene, x, y, text, {
-      fontSize: '2rem',
+      fontSize: fontSize,
       color: '#fff',
       stroke: '#000',
       strokeThickness: 4
