@@ -88,15 +88,15 @@ export default class MainMenuScene extends Phaser.Scene {
     // const JOGAR6 = this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.6)
     // const JOGAR7 = this.add.text(playButton.x, playButton.y, 'JOGAR 6').setTint(0xf7f).setOrigin(0.5, 1)
 
-    this.add.container(playButton.x, playButton.y [
-      playButton,
-      JOGAR1,
-      JOGAR3,
-      JOGAR4,
-      JOGAR5,
-      JOGAR6,
-      JOGAR7
-    ]);
+    // this.add.container(playButton.x, playButton.y [
+    //   playButton,
+    //   JOGAR1,
+    //   JOGAR3,
+    //   JOGAR4,
+    //   JOGAR5,
+    //   JOGAR6,
+    //   JOGAR7
+    // ]);
     
 
 
