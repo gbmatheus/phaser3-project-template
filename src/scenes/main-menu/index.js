@@ -38,12 +38,12 @@ export default class MainMenuScene extends Phaser.Scene {
     const playButton = this.add.image(width * 0.5, height * 0.6, 'glass_panel')
       .setDisplaySize(150, 50)
       .setInteractive({pixelPerfect: true})
-    this.add.text(playButton.x, playButton.y, 'JOGAR').setOrigin(0.5, 0.25)
+    this.add.text(playButton.x, playButton.y, 'JOGAR').setOrigin(0.5, 0.65)
 
     const helpButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'glass_panel')
       .setDisplaySize(150, 50)
       .setInteractive({pixelPerfect: true})
-    this.add.text(helpButton.x, helpButton.y, 'TUTORIAL').setOrigin(0.5, 0.1)
+    this.add.text(helpButton.x, helpButton.y, 'TUTORIAL').setOrigin(0.5, 0.65)
 
     // const creditsButton = this.add.image(helpButton.x, helpButton.y + helpButton.displayHeight + 10, 'glass_panel')
     //   .setDisplaySize(150, 50)
@@ -81,12 +81,12 @@ export default class MainMenuScene extends Phaser.Scene {
     })
 
     
-    const JOGAR1 = this.add.text(playButton.x, playButton.y, 'JOGAR 1').setTint(0x66ff2f).setOrigin(0.5, 0)
-    const JOGAR3 = this.add.text(playButton.x, playButton.y, 'JOGAR 3').setTint(0x66ff).setOrigin(0.5, 0.2)
-    const JOGAR4 = this.add.text(playButton.x, playButton.y, 'JOGAR 4').setTint(0x662f7f).setOrigin(0.5, 0.5)
-    const JOGAR5 = this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.7)
-    const JOGAR6 = this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.6)
-    const JOGAR7 = this.add.text(playButton.x, playButton.y, 'JOGAR 6').setTint(0xf7f).setOrigin(0.5, 1)
+    // const JOGAR1 = this.add.text(playButton.x, playButton.y, 'JOGAR 1').setTint(0x66ff2f).setOrigin(0.5, 0)
+    // const JOGAR3 = this.add.text(playButton.x, playButton.y, 'JOGAR 3').setTint(0x66ff).setOrigin(0.5, 0.2)
+    // const JOGAR4 = this.add.text(playButton.x, playButton.y, 'JOGAR 4').setTint(0x662f7f).setOrigin(0.5, 0.5)
+    // const JOGAR5 = this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.6)
+    // const JOGAR6 = this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.6)
+    // const JOGAR7 = this.add.text(playButton.x, playButton.y, 'JOGAR 6').setTint(0xf7f).setOrigin(0.5, 1)
 
     this.add.container(playButton.x, playButton.y [
       playButton,
