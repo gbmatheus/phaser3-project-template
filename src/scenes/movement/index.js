@@ -19,7 +19,7 @@ import gameStatus from "../../consts/game-status";
 export default class MainMenuScene extends Phaser.Scene {
   constructor() {
     super("movement-scene");
-    super({ key: "movement-scene", active: true });
+    // super({ key: "movement-scene", active: true });
     // super({ key: "movement-scene", active: true, visible: false });
     this.buttons = [];
     this.selectButtonIndex = 0;
