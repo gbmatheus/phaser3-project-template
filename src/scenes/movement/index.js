@@ -46,6 +46,7 @@ export default class MainMenuScene extends Phaser.Scene {
 
   create() {
     this.stepsCount = new StepsCount(this, 448, 0, 0, this.stepsLimit).setOrigin(0.5)
+    this.stepsCount2 = new StepsCount(this, 448, 0, 0, this.stepsLimit)
 
     const { width, height } = this.scale;
     const scaleButton = 0.2;
@@ -382,7 +383,8 @@ export default class MainMenuScene extends Phaser.Scene {
       iconArrowLeft,
       iconArrowRight,
       iconDelete,
-      this.stepsCount
+      this.stepsCount,
+      this.stepsCount2
     ]);
 
     this.input.on("dragstart", (pointer, gameObject) => {
