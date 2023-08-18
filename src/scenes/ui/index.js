@@ -15,11 +15,11 @@ export default class UIScene extends Phaser.Scene {
 
   create () {
     console.log('create ui-scene ')
-    this.score = new Score(this, 640, 16, 0).setOrigin(0, 0.125)
+    this.score = new Score(this, 640, 16, 0).setOrigin(0, 0.2)
     this.score2 = new Score(this, 640, 16, 1).setOrigin(0.5)
     this.score3 = new Score(this, 640, 16, 2).setOrigin(1)
     this.score4 = new Score(this, 640, 16, 3).setOrigin(0.25)
-    this.score5 = new Score(this, 640, 16, 4).setOrigin(0.75)
+    this.score5 = new Score(this, 640, 16, 4)
     
     this.add.graphics({ lineStyle: { width: 2, color: 0xaa0000 } }).strokeRectShape(this.score)
     this.add.graphics({ lineStyle: { width: 2, color: 0xaa0000 } }).strokeRectShape(this.score2)
