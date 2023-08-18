@@ -63,10 +63,24 @@ export default class MainMenuScene extends Phaser.Scene {
     .setScale(scaleButton);
     iconReturn.setName("restart");
     iconReturn.setInteractive();
-    iconReturn.on("pointerup", () => {
-      // this.scene.restart()
-      this.game.events.emit(EventName.gameEnd, { status: gameStatus.restart })
-    })
+    iconReturn.on("pointerover", () => {
+        iconReturn.setTint(0xE3B4B2);
+      })
+      .on("pointerout", () => {
+        iconReturn.setTint();
+      })
+      // .on("pointerdown", () => {
+      //   console.log("RESTART click");
+      //   iconReturn.setTint(0x66ff7f);
+      //   this.stepsCount.changeValue('SET_VALUE', 0)
+      //   this.game.events.emit(EventName.executeSteps, "RESTART", { steps: [] });
+      //   // this.scene.start('loading-scene')
+      // })
+      .on("pointerup", () => {
+        // this.scene.restart()
+        this.steps = []
+        this.game.events.emit(EventName.gameEnd, { status: gameStatus.restart })
+      })
 
     this.stepsImageObject = this.add.group();
 
