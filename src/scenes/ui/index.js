@@ -16,6 +16,10 @@ export default class UIScene extends Phaser.Scene {
   create () {
     console.log('create ui-scene ')
     this.score = new Score(this, 640, 16, 0)
+    new Score(this, 640, 16, 1).setOrigin(0.5)
+    new Score(this, 640, 16, 2).setOrigin(1)
+    new Score(this, 640, 16, 3).setOrigin(0.25)
+    new Score(this, 640, 16, 4).setOrigin(0.75)
     // if(this.level == 1) this.score.setActive(false).setVisible(false)
     this.initListeners()
   }

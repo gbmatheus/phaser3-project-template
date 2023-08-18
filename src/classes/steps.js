@@ -2,7 +2,7 @@ import Text from "./text";
 
 export default class StepsCount extends Text {
   constructor(scene, x, y, initSteps = 0, limitSteps = 11) {
-    super(scene, x, y, `Movimentos\n${initSteps}/${limitSteps}`, '1.5rem');
+    super(scene, x, y, `Movimentos ${initSteps}/${limitSteps}`.split(' '), '18px');
     scene.add.existing(this);
     this.stepsValue = initSteps;
     this.limitSteps = limitSteps;

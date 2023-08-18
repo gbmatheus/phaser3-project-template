@@ -45,9 +45,6 @@ export default class MainMenuScene extends Phaser.Scene {
   }
 
   create() {
-    this.stepsCount = new StepsCount(this, 448, 0, 0, this.stepsLimit).setOrigin(0.5)
-    this.stepsCount2 = new StepsCount(this, 448, 0, 0, this.stepsLimit + 1)
-
     const { width, height } = this.scale;
     const scaleButton = 0.2;
     console.log('movement-scene ', { width, height })
@@ -370,6 +367,11 @@ export default class MainMenuScene extends Phaser.Scene {
         // this.scene.start('loading-scene')
       });
 
+    this.stepsCount = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit).setOrigin(0.5)
+    this.stepsCount2 = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit + 1).setOrigin(0.25)
+    this.stepsCount3 = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit + 2).setOrigin(0)
+    this.stepsCount4 = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit + 3).setOrigin(1)
+
     this.input.setDraggable([
       iconArrowUp,
       iconArrowDown,
@@ -384,7 +386,9 @@ export default class MainMenuScene extends Phaser.Scene {
       iconArrowRight,
       iconDelete,
       this.stepsCount,
-      this.stepsCount2
+      this.stepsCount2,
+      this.stepsCount3,
+      this.stepsCount4
     ]);
 
     this.input.on("dragstart", (pointer, gameObject) => {
