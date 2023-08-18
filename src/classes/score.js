@@ -2,7 +2,7 @@ import Text from "./text";
 
 export default class Score extends Text {
   constructor(scene, x, y, initScore = 0) {
-    super(scene, x, y, `Baús ${initScore}`.split(' '));
+    super(scene, x, y, `Baús: ${initScore}`.split(' '));
     scene.add.existing(this);
     this.scoreValue = initScore;
   }

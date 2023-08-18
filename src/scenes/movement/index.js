@@ -368,9 +368,14 @@ export default class MainMenuScene extends Phaser.Scene {
       });
 
     this.stepsCount = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit).setOrigin(0.5)
+    this.add.graphics({ lineStyle: { width: 2, color: 0xaa0000 } }).strokeRectShape(this.stepsCount)
     this.stepsCount2 = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit + 1).setOrigin(0.25)
+    this.add.graphics({ lineStyle: { width: 2, color: 0xaa0000 } }).strokeRectShape(this.stepsCount2)
     this.stepsCount3 = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit + 2).setOrigin(0)
+    this.add.graphics({ lineStyle: { width: 2, color: 0xaa0000 } }).strokeRectShape(this.stepsCount3)
     this.stepsCount4 = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit + 3).setOrigin(1)
+    this.add.graphics({ lineStyle: { width: 2, color: 0xaa0000 } }).strokeRectShape(this.stepsCount4)
+      
 
     this.input.setDraggable([
       iconArrowUp,
