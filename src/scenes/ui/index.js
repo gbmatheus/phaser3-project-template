@@ -24,9 +24,9 @@ export default class UIScene extends Phaser.Scene {
     console.log({scene: this.scene})
     this.score.changeValue('INCREASE', 1)
     console.log({ score: this.score.getValue(), winScore: this.score.getValue() === 3 })
-    if(this.score.getValue() === 3) {
-      this.game.events.emit(EventName.gameEnd, { status: gameStatus.win })
-    }
+    // if(this.score.getValue() === 3) {
+    //   this.game.events.emit(EventName.gameEnd, { status: gameStatus.win })
+    // }
   }
 
   gameEndHandler ({status, level}) {
