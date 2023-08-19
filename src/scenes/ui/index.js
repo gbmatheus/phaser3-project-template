@@ -17,6 +17,7 @@ export default class UIScene extends Phaser.Scene {
     console.log('create ui-scene ')
     // this
     this.score = new Score(this, 640, 16, 0).setOrigin(0.3, 0.42).setPadding(0)
+    this.score = new Score(this, 640, 16, 0).setOrigin(0.3, 0.42).setPadding(0)
     this.score2 = new Score(this, 640, 16, 1).setOrigin(0.5).setPadding(1)
     this.score3 = new Score(this, 640, 16, 2).setOrigin(1).setPadding(0)
     this.score4 = new Score(this, 640, 16, 3).setOrigin(0.4).setPadding(0)
@@ -100,9 +101,56 @@ export default class UIScene extends Phaser.Scene {
         this.game.scale.width / 2 - this.gameEndPhase3.width / 2,
         this.game.scale.height * 0.4 + 60,
       )
-      console.log("this.game.scale ", this.gameEndPhase.width / 2)  
-      console.log("this.game.scale ", this.gameEndPhase2.width / 2)  
-      console.log("this.game.scale ", this.gameEndPhase3.width / 2)  
+
+      this.gameEndPhase4 = new Text(
+        this,
+        this.game.scale.width / 2,
+        this.game.scale.height * 0.4,
+         'CLIQUE PARA TENTAR NOVAMENTE -- 4'
+      )
+      .setAlign('center')
+      .setColor('#ff0000')
+      .setLineSpacing(0)
+      
+      this.gameEndPhase4.setPosition(
+        this.game.scale.width / 2 - this.gameEndPhase4.width / 2,
+        this.game.scale.height * 0.4 + 60,
+      ).setOrigin(1)
+
+      this.gameEndPhase6 = new Text(
+        this,
+        this.game.scale.width / 2,
+        this.game.scale.height * 0.4,
+         'CLIQUE PARA TENTAR NOVAMENTE ---- 6'
+      )
+      .setAlign('center')
+      .setColor('#ff0000')
+      .setLineSpacing(0)
+      
+      this.gameEndPhase6.setPosition(
+        this.game.scale.width / 2 - this.gameEndPhase6.width / 2,
+        this.game.scale.height * 0.4 + 60,
+      ).setOrigin(0.5)
+
+      this.gameEndPhase5 = new Text(
+        this,
+        this.game.scale.width / 2,
+        this.game.scale.height * 0.4,
+         'CLIQUE PARA TENTAR NOVAMENTE ----5'
+      )
+      .setAlign('center')
+      .setColor('#ff0000')
+      .setLineSpacing(0)
+      
+      this.gameEndPhase5.setPosition(
+        this.game.scale.width / 2 - this.gameEndPhase5.width / 2,
+        this.game.scale.height * 0.4 + 60,
+      )
+
+      
+      console.log("this.game.scale ", this.gameEndPhase.height)  
+      console.log("this.game.scale ", this.gameEndPhase2.height)  
+      console.log("this.game.scale ", this.gameEndPhase3.height)  
 
       new Text(
         this,
