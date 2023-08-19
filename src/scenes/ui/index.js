@@ -15,7 +15,7 @@ export default class UIScene extends Phaser.Scene {
 
   create () {
     console.log('create ui-scene ')
-    this.score = new Score(this, 640, 16, 0).setOrigin(0, 0.2)
+    this.score = new Score(this, 640, 16, 0).setOrigin(0, 0.3)
     this.score2 = new Score(this, 640, 16, 1).setOrigin(0.5)
     this.score3 = new Score(this, 640, 16, 2).setOrigin(1)
     this.score4 = new Score(this, 640, 16, 3).setOrigin(0.25)
