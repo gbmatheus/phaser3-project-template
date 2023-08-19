@@ -381,7 +381,7 @@ export default class MainMenuScene extends Phaser.Scene {
         // this.scene.start('loading-scene')
       });
 
-    this.stepsCount = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit).setOrigin(0.25, 0.75)
+    this.stepsCount = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit).setOrigin(0.25, 0.65)
     this.stepsCount2 = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit + 1).setOrigin(0.5)
     this.stepsCount3 = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit + 2).setOrigin(0)
     this.stepsCount4 = new StepsCount(this, iconDelete.x + iconDelete.displayWidth + 64, iconDelete.y, 0, this.stepsLimit + 3).setOrigin(1)

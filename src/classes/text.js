@@ -9,8 +9,8 @@ export default class Text extends GameObjects.Text {
       stroke: '#000',
       strokeThickness: 4
     });
-    this.setPadding({ x: 0, y: 0 })
-    this.setOrigin(0, 0)
+    // this.setPadding({ x: 0, y: 0 })
+    // this.setOrigin(0, 0)
     scene.add.existing(this)
   }
 }
