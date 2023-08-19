@@ -15,11 +15,12 @@ export default class UIScene extends Phaser.Scene {
 
   create () {
     console.log('create ui-scene ')
-    this.score = new Score(this, 640, 16, 0).setOrigin(0, 0.4)
-    this.score2 = new Score(this, 640, 16, 1).setOrigin(0.5)
-    this.score3 = new Score(this, 640, 16, 2).setOrigin(1)
-    this.score4 = new Score(this, 640, 16, 3).setOrigin(0.25)
-    this.score5 = new Score(this, 640, 16, 4)
+    // this
+    this.score = new Score(this, 640, 16, 0).setOrigin(0, 0.4).setPadding(0)
+    this.score2 = new Score(this, 640, 16, 1).setOrigin(0.5).setPadding(0)
+    this.score3 = new Score(this, 640, 16, 2).setOrigin(1).setPadding(0)
+    this.score4 = new Score(this, 640, 16, 3).setOrigin(0.25).setPadding(0)
+    this.score5 = new Score(this, 640, 16, 4).setPadding(0)
 
     // if(this.level == 1) this.score.setActive(false).setVisible(false)
     this.initListeners()
@@ -96,36 +97,6 @@ export default class UIScene extends Phaser.Scene {
         this.game.scale.width / 2 - this.gameEndPhase3.width / 2,
         this.game.scale.height * 0.4 + 69,
       )
-
-      this.gameEndPhase = new Text(
-        this,
-        this.game.scale.width / 2,
-        this.game.scale.height * 0.4,
-        status === GameStatus.lose
-          ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-          : `PARABÉNS! VOCÊ COMPLETOU O NÍVEL ${level}!\nCLIQUE PARA INICIAR O NÍVEL ${Number(level) + 1}`
-        // status === GameStatus.lose
-        //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-        //   : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
-      )
-      .setAlign('center')
-      .setColor('#ff0000')
-      .setLineSpacing(0)
-
-      this.gameEndPhase = new Text(
-        this,
-        this.game.scale.width / 2,
-        this.game.scale.height * 0.4,
-        status === GameStatus.lose
-          ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-          : `PARABÉNS! VOCÊ COMPLETOU O NÍVEL ${level}!\nCLIQUE PARA INICIAR O NÍVEL ${Number(level) + 1}`
-        // status === GameStatus.lose
-        //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-        //   : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
-      )
-      .setAlign('center')
-      .setColor('#ff0000')
-      .setLineSpacing(0)
 
       new Text(
         this,
