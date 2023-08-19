@@ -16,8 +16,7 @@ export default class UIScene extends Phaser.Scene {
   create () {
     console.log('create ui-scene ')
     // this
-    this.score = new Score(this, 640, 16, 0).setOrigin(0.3, 0.42).setPadding(0)
-    this.score = new Score(this, 640, 16, 0).setOrigin(0.3, 0.42).setPadding(0)
+    this.score = new Score(this, 640, 16, 0).setOrigin(0.35, 0.45).setPadding(0)
     this.score2 = new Score(this, 640, 16, 1).setOrigin(0.5).setPadding(1)
     this.score3 = new Score(this, 640, 16, 2).setOrigin(1).setPadding(0)
     this.score4 = new Score(this, 640, 16, 3).setOrigin(0.4).setPadding(0)
@@ -70,7 +69,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase.width / 2,
         this.game.scale.height * 0.4,
-      ).setOrigin(0, 1)
+      ).setOrigin(0, 0.5)
       
       this.gameEndPhase2 = new Text(
         this,
@@ -85,7 +84,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase2.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase2.width / 2,
         this.game.scale.height * 0.4 + 30,
-      ).setOrigin(0, 1)
+      ).setOrigin(0, 0.5)
 
       this.gameEndPhase3 = new Text(
         this,
@@ -100,7 +99,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase3.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase3.width / 2,
         this.game.scale.height * 0.4 + 60,
-      ).setOrigin(0, 1)
+      ).setOrigin(0, 0.5)
 
       this.gameEndPhase4 = new Text(
         this,
@@ -131,91 +130,6 @@ export default class UIScene extends Phaser.Scene {
         this.game.scale.width / 2 - this.gameEndPhase6.width / 2,
         this.game.scale.height * 0.4 + 60,
       ).setOrigin(0.5)
-
-      this.gameEndPhase5 = new Text(
-        this,
-        this.game.scale.width / 2,
-        this.game.scale.height * 0.4,
-         'CLIQUE PARA TENTAR NOVAMENTE ----5'
-      )
-      .setAlign('center')
-      .setColor('#ff0000')
-      .setLineSpacing(0)
-      
-      this.gameEndPhase5.setPosition(
-        this.game.scale.width / 2 - this.gameEndPhase5.width / 2,
-        this.game.scale.height * 0.4 + 60,
-      )
-
-      
-      console.log("this.game.scale ", this.gameEndPhase.height)  
-      console.log("this.game.scale ", this.gameEndPhase2.height)  
-      console.log("this.game.scale ", this.gameEndPhase3.height)  
-
-      new Text(
-        this,
-        20,
-        20,
-        ['NÃO FOI DESSA VEZ', 'MAS VOCÊ PODE TENTAR NOVAMENTE!', 'CLIQUE PARA TENTAR NOVAMENTE']
-        // status === GameStatus.lose
-        //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-        //   : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
-      )
-      .setAlign('center')
-      .setColor('#fff000')
-      .setLineSpacing(1)
-
-      new Text(
-        this,
-        20,
-        40,
-        ['NÃO FOI DESSA VEZ', 'MAS VOCÊ PODE TENTAR NOVAMENTE!', 'CLIQUE PARA TENTAR NOVAMENTE']
-        // status === GameStatus.lose
-        //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-        //   : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
-      )
-      .setAlign('center')
-      .setColor('#ff0ff0')
-      .setLineSpacing(1.5)
-
-      new Text(
-        this,
-        20,
-        60,
-        ['NÃO FOI DESSA VEZ', 'MAS VOCÊ PODE TENTAR NOVAMENTE!', 'CLIQUE PARA TENTAR NOVAMENTE']
-        // status === GameStatus.lose
-        //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-        //   : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
-      )
-      .setAlign('center')
-      .setColor('#000fff')
-      .setLineSpacing(2)
-
-      new Text(
-        this,
-        20,
-        80,
-        ['NÃO FOI DESSA VEZ', 'MAS VOCÊ PODE TENTAR NOVAMENTE!', 'CLIQUE PARA TENTAR NOVAMENTE']
-        // status === GameStatus.lose
-        //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-        //   : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
-      )
-      .setAlign('center')
-      .setColor('#00ffff')
-      .setLineSpacing(0.5)
-
-      new Text(
-        this,
-        20,
-        100,
-        ['NÃO FOI DESSA VEZ', 'MAS VOCÊ PODE TENTAR NOVAMENTE!', 'CLIQUE PARA TENTAR NOVAMENTE']
-        // status === GameStatus.lose
-        //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-        //   : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
-      )
-      .setAlign('center')
-      .setColor('#00ff00')
-      .setLineSpacing(0.75)
 
     } else {
       this.gameEndPhase = new Text(
