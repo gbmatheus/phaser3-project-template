@@ -70,7 +70,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase.width / 2,
         this.game.scale.height * 0.4,
-      )
+      ).setOrigin(0, 1)
       
       this.gameEndPhase2 = new Text(
         this,
@@ -85,7 +85,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase2.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase2.width / 2,
         this.game.scale.height * 0.4 + 30,
-      )
+      ).setOrigin(0, 1)
 
       this.gameEndPhase3 = new Text(
         this,
@@ -100,7 +100,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase3.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase3.width / 2,
         this.game.scale.height * 0.4 + 60,
-      )
+      ).setOrigin(0, 1)
 
       this.gameEndPhase4 = new Text(
         this,
@@ -231,7 +231,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase.width / 2,
         this.game.scale.height * 0.4,
-      )
+      ).setOrigin(0, 1)
 
       this.gameEndPhase2 = new Text(
         this,
@@ -246,7 +246,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase2.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase2.width / 2,
         this.game.scale.height * 0.4 + 30,
-      )
+      ).setOrigin(0, 1)
     }
 
     this.game.scene.pause(`level-${Number(level)}-scene`)
