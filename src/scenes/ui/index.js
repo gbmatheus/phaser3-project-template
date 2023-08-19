@@ -16,7 +16,7 @@ export default class UIScene extends Phaser.Scene {
   create () {
     console.log('create ui-scene ')
     // this
-    this.score = new Score(this, 640, 16, 0).setOrigin(0.3, 0.3).setPadding(0)
+    this.score = new Score(this, 640, 16, 0).setOrigin(0.25, 0.35).setPadding(0)
     this.score2 = new Score(this, 640, 16, 1).setOrigin(0.5).setPadding(1)
     this.score3 = new Score(this, 640, 16, 2).setOrigin(1).setPadding(0)
     this.score4 = new Score(this, 640, 16, 3).setOrigin(0.4).setPadding(0)
@@ -95,42 +95,6 @@ export default class UIScene extends Phaser.Scene {
       .setAlign('center')
       .setColor('#ff0000')
       .setLineSpacing(0)
-      
-      this.gameEndPhase3.setPosition(
-        this.game.scale.width / 2 - this.gameEndPhase3.width / 2,
-        this.game.scale.height * 0.4 + 60,
-      ).setOrigin(0, 0.75)
-
-      this.gameEndPhase4 = new Text(
-        this,
-        this.game.scale.width / 2,
-        this.game.scale.height * 0.4,
-         'CLIQUE PARA TENTAR NOVAMENTE -- 4'
-      )
-      .setAlign('center')
-      .setColor('#ff0000')
-      .setLineSpacing(0)
-      
-      this.gameEndPhase4.setPosition(
-        this.game.scale.width / 2 - this.gameEndPhase4.width / 2,
-        this.game.scale.height * 0.4 + 60,
-      ).setOrigin(1)
-
-      this.gameEndPhase6 = new Text(
-        this,
-        this.game.scale.width / 2,
-        this.game.scale.height * 0.4,
-         'CLIQUE PARA TENTAR NOVAMENTE ---- 6'
-      )
-      .setAlign('center')
-      .setColor('#ff0000')
-      .setLineSpacing(0)
-      
-      this.gameEndPhase6.setPosition(
-        this.game.scale.width / 2 - this.gameEndPhase6.width / 2,
-        this.game.scale.height * 0.4 + 60,
-      ).setOrigin(0.5)
-
     } else {
       this.gameEndPhase = new Text(
         this,
@@ -145,7 +109,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase.width / 2,
         this.game.scale.height * 0.4,
-      ).setOrigin(0, 1)
+      ).setOrigin(0, 0.75)
 
       this.gameEndPhase2 = new Text(
         this,
@@ -160,7 +124,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase2.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase2.width / 2,
         this.game.scale.height * 0.4 + 30,
-      ).setOrigin(0, 1)
+      ).setOrigin(0, 0.75)
     }
 
     this.game.scene.pause(`level-${Number(level)}-scene`)
