@@ -16,7 +16,7 @@ export default class UIScene extends Phaser.Scene {
   create () {
     console.log('create ui-scene ')
     // this
-    this.score = new Score(this, 640, 16, 0).setOrigin(0.35, 0.45).setPadding(0)
+    this.score = new Score(this, 640, 16, 0).setOrigin(0.3, 0.3).setPadding(0)
     this.score2 = new Score(this, 640, 16, 1).setOrigin(0.5).setPadding(1)
     this.score3 = new Score(this, 640, 16, 2).setOrigin(1).setPadding(0)
     this.score4 = new Score(this, 640, 16, 3).setOrigin(0.4).setPadding(0)
@@ -69,7 +69,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase.width / 2,
         this.game.scale.height * 0.4,
-      ).setOrigin(0, 0.5)
+      ).setOrigin(0, 0.75)
       
       this.gameEndPhase2 = new Text(
         this,
@@ -84,7 +84,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase2.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase2.width / 2,
         this.game.scale.height * 0.4 + 30,
-      ).setOrigin(0, 0.5)
+      ).setOrigin(0, 0.75)
 
       this.gameEndPhase3 = new Text(
         this,
@@ -99,7 +99,7 @@ export default class UIScene extends Phaser.Scene {
       this.gameEndPhase3.setPosition(
         this.game.scale.width / 2 - this.gameEndPhase3.width / 2,
         this.game.scale.height * 0.4 + 60,
-      ).setOrigin(0, 0.5)
+      ).setOrigin(0, 0.75)
 
       this.gameEndPhase4 = new Text(
         this,
