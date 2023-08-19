@@ -74,12 +74,12 @@ export default class UIScene extends Phaser.Scene {
     )
     .setAlign('center')
     .setColor('#fff000')
-    .setLineSpacing(0)
+    .setLineSpacing(1)
 
     new Text(
       this,
       20,
-      20,
+      40,
       ['NÃO FOI DESSA VEZ', 'MAS VOCÊ PODE TENTAR NOVAMENTE!', 'CLIQUE PARA TENTAR NOVAMENTE']
       // status === GameStatus.lose
       //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
@@ -87,7 +87,21 @@ export default class UIScene extends Phaser.Scene {
     )
     .setAlign('center')
     .setColor('#ff0ff0')
+    .setLineSpacing(1.5)
+
+    new Text(
+      this,
+      20,
+      60,
+      ['NÃO FOI DESSA VEZ', 'MAS VOCÊ PODE TENTAR NOVAMENTE!', 'CLIQUE PARA TENTAR NOVAMENTE']
+      // status === GameStatus.lose
+      //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
+      //   : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
+    )
+    .setAlign('center')
+    .setColor('#000fff')
     .setLineSpacing(2)
+
 
     this.gameEndPhase.setPosition(
       this.game.scale.width / 2 - this.gameEndPhase.width / 2,
