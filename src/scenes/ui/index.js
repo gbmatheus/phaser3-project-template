@@ -61,6 +61,7 @@ export default class UIScene extends Phaser.Scene {
     )
     .setAlign('center')
     .setColor(status === GameStatus.lose ? '#ff0000' : '#ffffff')
+    .setLineSpacing(10)
 
     this.gameEndPhase.setPosition(
       this.game.scale.width / 2 - this.gameEndPhase.width / 2,
