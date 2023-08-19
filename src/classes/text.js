@@ -7,7 +7,8 @@ export default class Text extends GameObjects.Text {
       fontSize: fontSize,
       color: '#fff',
       stroke: '#000',
-      strokeThickness: 4
+      strokeThickness: 4,
+      lineSpacing: 10
     });
     // this.setPadding({ x: 0, y: 0 })
     // this.setOrigin(0, 0)
