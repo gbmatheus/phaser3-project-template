@@ -99,6 +99,8 @@ export default class MainMenuScene extends Phaser.Scene {
     helpButton.on('selected', () => {
       console.log("settings")
     }).on('pointerdown', () => {
+      window.open("https://www.youtube.com/");
+
       console.log("settings click")
       helpButton.setTint(0x66ff7f)
     }).on('pointerover', () => {
