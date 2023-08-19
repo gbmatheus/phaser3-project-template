@@ -13,8 +13,10 @@ import MovementScene from './scenes/movement';
 const config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 1920,
-    height: 1080,
+    width: 736,
+    height: 640,
+    // width: 1920,
+    // height: 1080,
     backgroundColor: "#763B36",
     // zoom: 1.25,
     physics: {
