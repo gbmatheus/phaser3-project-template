@@ -16,7 +16,7 @@ export default class UIScene extends Phaser.Scene {
   create () {
     console.log('create ui-scene ')
     // this
-    this.score = new Score(this, 640, 16, 0).setOrigin(0, 0.4).setPadding(0)
+    this.score = new Score(this, 640, 16, 0).setOrigin(0.3, 0.42).setPadding(0)
     this.score2 = new Score(this, 640, 16, 1).setOrigin(0.5).setPadding(1)
     this.score3 = new Score(this, 640, 16, 2).setOrigin(1).setPadding(0)
     this.score4 = new Score(this, 640, 16, 3).setOrigin(0.4).setPadding(0)
@@ -51,6 +51,7 @@ export default class UIScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor('rgba(0,0,0,0.6)');
     console.log("this.game.scale ", this.game.scale)
     console.log("this.game.scale ", this.game.scale.width)
+    console.log("this.game.scale ", this.game.scale.height)
     console.log("this.game.scale ",this.game.scale.width / 2)
     console.log("this.game.scale ",  this.game.scale.height * 0.4)
 
