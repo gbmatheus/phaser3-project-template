@@ -1,7 +1,8 @@
 import Phaser from "phaser";
 import glassPanel from "../../assets/ui-pack/glassPanel.png";
 import cursorHand from "../../assets/ui-pack/cursor_hand.png";
-import backgroundImage from "../../assets/background.jpeg";
+import backgroundImage from "../../assets/background.png";
+import gameNameImage from "../../assets/game-name.png";
 
 export default class MainMenuScene extends Phaser.Scene {
   constructor() {
@@ -18,6 +19,7 @@ export default class MainMenuScene extends Phaser.Scene {
     this.load.image('glass_panel', glassPanel)
     this.load.image('cursor_hand', cursorHand)
     this.load.image('background', backgroundImage)
+    this.load.image('game_name', gameNameImage)
   }
 
   create () {
@@ -29,6 +31,7 @@ export default class MainMenuScene extends Phaser.Scene {
     console.log('main-menu-scene ', { width, height })
 
     this.add.image(width * 0.5, height * 0.5, 'background').setOrigin(0.5)
+    this.add.image(width * 0.1, height * 0.1, 'game_name').setOrigin(0, 0)
 
     // play button
     const playButton = this.add.image(width * 0.5, height * 0.6, 'glass_panel')
