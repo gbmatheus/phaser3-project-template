@@ -10,11 +10,10 @@ export default class UIScene extends Phaser.Scene {
   constructor() {
     super('ui-scene')
     // super({ key: 'ui-scene', active: true})
-    this.level = 1;
   }
 
   create () {
-    console.log('create ui-scene ')
+    console.log('create ui-scene')
     // this
     // this.score = new Score(this, 640, 16, 0).setOrigin(0.2, 0.37).setPadding(0)
 
@@ -33,13 +32,14 @@ export default class UIScene extends Phaser.Scene {
 
   gameEndHandler ({status, level}) {
     console.log({status, level})
+    console.log('create ui-scene LEVEL GAME ', this.game.level)
     console.log({ game: this.game, scene: this.game.scene })
     
-    if(this.level !== 1)
-      this.level = Number(level)
+    if(level && level !== 1)
+      this.game.level = Number(level)
     if(status === GameStatus.restart) {
         console.log(`Restart - level-${Number(level)}-scene`)
-        this.scene.get(`level-${Number(this.level)}-scene`).scene.start()
+        this.scene.get(`level-${Number(this.game.level)}-scene`).scene.start()
         this.scene.get('movement-scene').scene.restart()        
         this.scene.restart()
     }
@@ -133,7 +133,7 @@ export default class UIScene extends Phaser.Scene {
       this.game.events.off(EventName.executeSteps)
       this.game.events.off(EventName.steps)
       if(status === GameStatus.lose) {
-          this.scene.get(`level-${Number(this.level)}-scene`).scene.restart()
+          this.scene.get(`level-${Number(this.game.level)}-scene`).scene.restart()
           this.scene.get('movement-scene').scene.restart()
           // this.scene.restart()
       } else if(status === GameStatus.win) {
@@ -143,10 +143,12 @@ export default class UIScene extends Phaser.Scene {
         
         console.log(`Stop - level-${Number(level)}-scene`)
         // this.scene.stop(`level-${Number(level)}-scene`)
+        
         this.scene.get(`level-${Number(level)}-scene`).scene.stop()
-
-        console.log(`Start - level-${Number(level) + 1}-scene`)
-        this.scene.get(`level-${Number(level) + 1}-scene`).scene.start()
+        
+        this.game.level = Number(level) + 1
+        console.log(`Start - level-${this.game.level}-scene`)
+        this.scene.get(`level-${this.game.level}-scene`).scene.start()
         this.scene.get('movement-scene').scene.restart()        
       }
       this.scene.restart()
