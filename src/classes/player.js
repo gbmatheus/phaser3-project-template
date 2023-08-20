@@ -6,15 +6,20 @@ export default class Player extends Actor {
   constructor(scene, x, y) {
     super(scene, x, y, "player");
 
-    this.keyUp = this.scene.input.keyboard.addKey("UP");
-    this.keyDown = this.scene.input.keyboard.addKey("DOWN");
-    this.keyLeft = this.scene.input.keyboard.addKey("LEFT");
-    this.keyRight = this.scene.input.keyboard.addKey("RIGHT");
+    this.keyUp = this.scene.input.keyboard.addKey("W");
+    this.keyDown = this.scene.input.keyboard.addKey("A");
+    this.keyLeft = this.scene.input.keyboard.addKey("S");
+    this.keyRight = this.scene.input.keyboard.addKey("D");
 
-    this.keyW = this.scene.input.keyboard.addKey("W");
-    this.keyA = this.scene.input.keyboard.addKey("A");
-    this.keyS = this.scene.input.keyboard.addKey("S");
-    this.keyD = this.scene.input.keyboard.addKey("D");
+    // this.keyUp = this.scene.input.keyboard.addKey("UP");
+    // this.keyDown = this.scene.input.keyboard.addKey("DOWN");
+    // this.keyLeft = this.scene.input.keyboard.addKey("LEFT");
+    // this.keyRight = this.scene.input.keyboard.addKey("RIGHT");
+
+    // this.keyW = this.scene.input.keyboard.addKey("W");
+    // this.keyA = this.scene.input.keyboard.addKey("A");
+    // this.keyS = this.scene.input.keyboard.addKey("S");
+    // this.keyD = this.scene.input.keyboard.addKey("D");
 
     this.getBody().setSize(30, 30);
     // offset indica o inicio da renderização do sprite
@@ -40,29 +45,53 @@ export default class Player extends Actor {
 
     this.getBody().setVelocity(0);
 
-    if (this.keyW.isDown || this.keyUp.isDown) 
+    if (this.keyUp.isDown) 
       this.getBody().setVelocityY(-100);
 
-    if (this.keyS.isDown || this.keyDown.isDown) 
+    if (this.keyDown.isDown) 
       this.getBody().setVelocityY(100);
 
-    if (this.keyA.isDown || this.keyLeft.isDown) 
+    if (this.keyLeft.isDown) 
       this.getBody().setVelocityX(-100);
 
-    if (this.keyD.isDown || this.keyRight.isDown) 
+    if (this.keyRight.isDown) 
       this.getBody().setVelocityX(100);
 
-    if (this.keyW.isDown || this.keyUp.isDown) {
+    if (this.keyUp.isDown) {
       this.anims.play("back", true);
-    } else if (this.keyS.isDown || this.keyDown.isDown) {
+    } else if (this.keyDown.isDown) {
       this.anims.play("front", true);
-    } else if (this.keyA.isDown || this.keyLeft.isDown) {
+    } else if (this.keyLeft.isDown) {
       this.anims.play("left", true);
-    } else if (this.keyD.isDown || this.keyRight.isDown) {
+    } else if (this.keyRight.isDown) {
       this.anims.play("right", true);
     } else {
         this.anims.stop();
     }
+
+    // if (this.keyW.isDown || this.keyUp.isDown) 
+    //   this.getBody().setVelocityY(-100);
+
+    // if (this.keyS.isDown || this.keyDown.isDown) 
+    //   this.getBody().setVelocityY(100);
+
+    // if (this.keyA.isDown || this.keyLeft.isDown) 
+    //   this.getBody().setVelocityX(-100);
+
+    // if (this.keyD.isDown || this.keyRight.isDown) 
+    //   this.getBody().setVelocityX(100);
+
+    // if (this.keyW.isDown || this.keyUp.isDown) {
+    //   this.anims.play("back", true);
+    // } else if (this.keyS.isDown || this.keyDown.isDown) {
+    //   this.anims.play("front", true);
+    // } else if (this.keyA.isDown || this.keyLeft.isDown) {
+    //   this.anims.play("left", true);
+    // } else if (this.keyD.isDown || this.keyRight.isDown) {
+    //   this.anims.play("right", true);
+    // } else {
+    //     this.anims.stop();
+    // }
 
     // if (this.prevVelocity.x < 0) 
     //   this.player.setTexture("player", "left");
