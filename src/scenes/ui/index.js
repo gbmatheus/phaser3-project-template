@@ -15,7 +15,10 @@ export default class UIScene extends Phaser.Scene {
 
   create () {
     console.log('create ui-scene ')
-    this.score = new Score(this, 20, 20, 0)
+    // this
+    this.score = new Score(this, 640, 16, 0).setOrigin(0.2, 0.37).setPadding(0)
+
+    // if(this.level == 1) this.score.setActive(false).setVisible(false)
     this.initListeners()
   }
 
@@ -23,9 +26,9 @@ export default class UIScene extends Phaser.Scene {
     console.log({scene: this.scene})
     this.score.changeValue('INCREASE', 1)
     console.log({ score: this.score.getValue(), winScore: this.score.getValue() === 3 })
-    if(this.score.getValue() === 3) {
-      this.game.events.emit(EventName.gameEnd, { status: gameStatus.win })
-    }
+    // if(this.score.getValue() === 3) {
+    //   this.game.events.emit(EventName.gameEnd, { status: gameStatus.win })
+    // }
   }
 
   gameEndHandler ({status, level}) {
@@ -42,24 +45,84 @@ export default class UIScene extends Phaser.Scene {
     }
 
     this.cameras.main.setBackgroundColor('rgba(0,0,0,0.6)');
-    this.gameEndPhase = new Text(
-      this,
-      this.game.scale.width / 2,
-      this.game.scale.height * 0.4,
-      status === GameStatus.lose
-        ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-        : `PARABÉNS! VOCÊ COMPLETOU O NÍVEL ${level}!\nCLIQUE PARA INICIAR O NÍVEL ${Number(level) + 1}`
-      // status === GameStatus.lose
-      //   ? `NÃO FOI DESSA VEZ,\n MAS VOCÊ PODE TENTAR NOVAMENTE! \nCLIQUE PARA TENTAR NOVAMENTE`
-      //   : `PARABÉNS! VOCÊ COMPLETOU A FASE!\nCLIQUE PARA INICIAR A PRÓXIMA FASE`
-    )
-    .setAlign('center')
-    .setColor(status === GameStatus.lose ? '#ff0000' : '#ffffff')
 
-    this.gameEndPhase.setPosition(
-      this.game.scale.width / 2 - this.gameEndPhase.width / 2,
-      this.game.scale.height * 0.4,
-    )
+    if(status === GameStatus.lose) {
+      this.gameEndPhase = new Text(
+        this,
+        this.game.scale.width / 2,
+        this.game.scale.height * 0.4,
+         'NÃO FOI DESSA VEZ'
+      )
+      .setAlign('center')
+      .setColor('#ff0000')
+      .setLineSpacing(0)
+      
+      this.gameEndPhase.setPosition(
+        this.game.scale.width / 2 - this.gameEndPhase.width / 2,
+        this.game.scale.height * 0.4,
+      ).setOrigin(0, 0.75)
+      
+      this.gameEndPhase2 = new Text(
+        this,
+        this.game.scale.width / 2,
+        this.game.scale.height * 0.4,
+         'MAS VOCÊ PODE TENTAR NOVAMENTE!'
+      )
+      .setAlign('center')
+      .setColor('#ff0000')
+      .setLineSpacing(0)
+      
+      this.gameEndPhase2.setPosition(
+        this.game.scale.width / 2 - this.gameEndPhase2.width / 2,
+        this.game.scale.height * 0.4 + 30,
+      ).setOrigin(0, 0.75)
+
+      this.gameEndPhase3 = new Text(
+        this,
+        this.game.scale.width / 2,
+        this.game.scale.height * 0.4,
+         'CLIQUE PARA TENTAR NOVAMENTE'
+      )
+      .setAlign('center')
+      .setColor('#ff0000')
+      .setLineSpacing(0)
+
+      this.gameEndPhase3.setPosition(
+        this.game.scale.width / 2 - this.gameEndPhase3.width / 2,
+        this.game.scale.height * 0.4 + 60,
+      ).setOrigin(0, 0.75)
+
+    } else {
+      this.gameEndPhase = new Text(
+        this,
+        this.game.scale.width / 2,
+        this.game.scale.height * 0.4,
+        `PARABÉNS! VOCÊ COMPLETOU O NÍVEL ${level}!`
+      )
+      .setAlign('center')
+      .setColor('#ffffff')
+      .setLineSpacing(0)
+
+      this.gameEndPhase.setPosition(
+        this.game.scale.width / 2 - this.gameEndPhase.width / 2,
+        this.game.scale.height * 0.4,
+      ).setOrigin(0, 0.75)
+
+      this.gameEndPhase2 = new Text(
+        this,
+        this.game.scale.width / 2,
+        this.game.scale.height * 0.4,
+        `CLIQUE PARA INICIAR O NÍVEL ${Number(level) + 1}`
+      )
+      .setAlign('center')
+      .setColor('#ffffff')
+      .setLineSpacing(0)
+
+      this.gameEndPhase2.setPosition(
+        this.game.scale.width / 2 - this.gameEndPhase2.width / 2,
+        this.game.scale.height * 0.4 + 30,
+      ).setOrigin(0, 0.75)
+    }
 
     this.game.scene.pause(`level-${Number(level)}-scene`)
     this.game.scene.pause('movement-scene')

@@ -15,6 +15,8 @@ const config = {
     parent: 'phaser-example',
     width: 736,
     height: 640,
+    // width: 1920,
+    // height: 1080,
     backgroundColor: "#763B36",
     // zoom: 1.25,
     physics: {

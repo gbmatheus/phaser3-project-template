@@ -21,7 +21,7 @@ export default class Score extends Text {
       default:
         break;
     }
-    this.setText(`Baús: ${this.scoreValue}`);
+    this.setText(`Baús ${this.scoreValue}`);
   }
 
   getValue() {

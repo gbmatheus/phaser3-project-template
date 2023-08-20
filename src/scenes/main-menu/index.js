@@ -1,11 +1,8 @@
 import Phaser from "phaser";
-import Score from "../../classes/score";
-import EventName from "../../consts/event-name";
-import GameStatus from "../../consts/game-status";
-import Text from "../../classes/text";
 import glassPanel from "../../assets/ui-pack/glassPanel.png";
 import cursorHand from "../../assets/ui-pack/cursor_hand.png";
-import backgroundImage from "../../assets/background.jpeg";
+import backgroundImage from "../../assets/background.png";
+import gameNameImage from "../../assets/game-name.png";
 
 export default class MainMenuScene extends Phaser.Scene {
   constructor() {
@@ -22,6 +19,7 @@ export default class MainMenuScene extends Phaser.Scene {
     this.load.image('glass_panel', glassPanel)
     this.load.image('cursor_hand', cursorHand)
     this.load.image('background', backgroundImage)
+    this.load.image('game_name', gameNameImage)
   }
 
   create () {
@@ -33,17 +31,18 @@ export default class MainMenuScene extends Phaser.Scene {
     console.log('main-menu-scene ', { width, height })
 
     this.add.image(width * 0.5, height * 0.5, 'background').setOrigin(0.5)
+    this.add.image(width * 0.1, height * 0.1, 'game_name').setOrigin(0, 0)
 
     // play button
     const playButton = this.add.image(width * 0.5, height * 0.6, 'glass_panel')
       .setDisplaySize(150, 50)
       .setInteractive({pixelPerfect: true})
-    this.add.text(playButton.x, playButton.y, 'Jogar').setOrigin(0.5)
+    this.add.text(playButton.x, playButton.y, 'JOGAR').setOrigin(0.5, 0.65)
 
     const helpButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'glass_panel')
       .setDisplaySize(150, 50)
       .setInteractive({pixelPerfect: true})
-    this.add.text(helpButton.x, helpButton.y, 'Tutorial').setOrigin(0.5)
+    this.add.text(helpButton.x, helpButton.y, 'TUTORIAL').setOrigin(0.5, 0.65)
 
     // const creditsButton = this.add.image(helpButton.x, helpButton.y + helpButton.displayHeight + 10, 'glass_panel')
     //   .setDisplaySize(150, 50)
@@ -80,9 +79,31 @@ export default class MainMenuScene extends Phaser.Scene {
       this.scene.start('loading-scene')
     })
 
+    
+    // const JOGAR1 = this.add.text(playButton.x, playButton.y, 'JOGAR 1').setTint(0x66ff2f).setOrigin(0.5, 0)
+    // const JOGAR3 = this.add.text(playButton.x, playButton.y, 'JOGAR 3').setTint(0x66ff).setOrigin(0.5, 0.2)
+    // const JOGAR4 = this.add.text(playButton.x, playButton.y, 'JOGAR 4').setTint(0x662f7f).setOrigin(0.5, 0.5)
+    // const JOGAR5 = this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.6)
+    // const JOGAR6 = this.add.text(playButton.x, playButton.y, 'JOGAR 5').setTint(0xff2).setOrigin(0.5, 0.6)
+    // const JOGAR7 = this.add.text(playButton.x, playButton.y, 'JOGAR 6').setTint(0xf7f).setOrigin(0.5, 1)
+
+    // this.add.container(playButton.x, playButton.y [
+    //   playButton,
+    //   JOGAR1,
+    //   JOGAR3,
+    //   JOGAR4,
+    //   JOGAR5,
+    //   JOGAR6,
+    //   JOGAR7
+    // ]);
+    
+
+
     helpButton.on('selected', () => {
       console.log("settings")
     }).on('pointerdown', () => {
+      window.open("https://www.youtube.com/");
+
       console.log("settings click")
       helpButton.setTint(0x66ff7f)
     }).on('pointerover', () => {

@@ -1,14 +1,17 @@
 import Phaser, { GameObjects } from "phaser";
 
 export default class Text extends GameObjects.Text {
-  constructor(scene, x, y, text) {
+  constructor(scene, x, y, text, fontSize = '24px') {
+    console.log(scene)
     super(scene, x, y, text, {
-      fontSize: 'calc(100vw / 25)',
+      fontSize: fontSize,
       color: '#fff',
       stroke: '#000',
-      strokeThickness: 4
+      strokeThickness: 4,
+      lineSpacing: 10
     });
-    this.setOrigin(0, 0)
+    // this.setPadding({ x: 0, y: 0 })
+    // this.setOrigin(0, 0)
     scene.add.existing(this)
   }
 }
