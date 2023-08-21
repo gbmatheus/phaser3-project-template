@@ -47,7 +47,7 @@ export default class MainMenuScene extends Phaser.Scene {
   create() {
     const { width, height } = this.scale;
     const scaleButton = 0.2;
-    console.log('movement-scene ', { width, height })
+    console.log('movement-scene ', { width, height, maxSteps: this.game.maxSteps })
 
     // mapa - 640 x 480
     // zona de largar o botão
@@ -101,46 +101,55 @@ export default class MainMenuScene extends Phaser.Scene {
           const lastStep = this.stepsImageObject.getChildren().slice(-1)[0]
           x = lastStep.x + iconArrowUp.displayWidth;
         }
-  
-        let stepImageObject = this.add
-          .image(x, zone.y, iconArrowUp.texture.key)
-          .setScale(scaleButton).setOrigin(0, -0.1)
-  
-        this.steps.push(iconArrowUp.name);
-        // this.stepsImageObject.add(stepImageObject.getChildren())
-        this.stepsImageObject.add(stepImageObject);
-        this.stepsCount.changeValue('INCREASE', 1)
-        console.log("stepsImageObject after add step ", {
-          stepsImageObject: this.stepsImageObject.getChildren(),
-        });
-        stepImageObject.on("pointerdown", (event) => {
-          console.log({event, stepImageObject});
-          //  Then destroy it. This will fire a 'destroy' event that the Group will hear
-          //  and then it'll automatically remove itself from the Group.
-          console.log("stepsImageObject before delete step ", {
-            stepImageObject: this.stepsImageObject.getChildren(),
-          });
-          const indexStepDestroy = this.stepsImageObject.getChildren().findIndex(step => step.x === stepImageObject.x)
-          console.log({indexStepDestroy})
-          let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
-          let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
-          stepImageObject.destroy();
-          this.stepsCount.changeValue('DECREASE', 1)
-
-          for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
-            if(this.stepsImageObject.getChildren()[index])
-            {
-              console.log({ actualStep: this.stepsImageObject.getChildren()[index], nextStep: this.stepsImageObject.getChildren()[index] })
-              nextStepPositionX = this.stepsImageObject.getChildren()[index].x
-              this.stepsImageObject.getChildren()[index].setX(positionX)
-              positionX = nextStepPositionX
-            }
-          }
-          console.log("stepsImageObject after delete step ", {
+        
+        if(this.stepsImageObject.getChildren().length < this.game.maxSteps) {
+          let stepImageObject = this.add
+            .image(x, zone.y, iconArrowUp.texture.key)
+            .setScale(scaleButton).setOrigin(0, -0.1)
+    
+          this.steps.push(iconArrowUp.name);
+          // this.stepsImageObject.add(stepImageObject.getChildren())
+          this.stepsImageObject.add(stepImageObject);
+          this.stepsCount.changeValue('INCREASE', 1)
+          console.log("stepsImageObject after add step ", {
             stepsImageObject: this.stepsImageObject.getChildren(),
           });
-        })
-        .setInteractive();
+          stepImageObject.on("pointerdown", (event) => {
+            console.log({event, stepImageObject});
+            //  Then destroy it. This will fire a 'destroy' event that the Group will hear
+            //  and then it'll automatically remove itself from the Group.
+            console.log("stepsImageObject before delete step ", {
+              stepImageObject: this.stepsImageObject.getChildren(),
+            });
+            const indexStepDestroy = this.stepsImageObject.getChildren().findIndex(step => step.x === stepImageObject.x)
+            console.log({indexStepDestroy})
+            let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
+            let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
+            stepImageObject.destroy();
+            this.stepsCount.changeValue('DECREASE', 1)
+  
+            for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
+              if(this.stepsImageObject.getChildren()[index])
+              {
+                console.log({ actualStep: this.stepsImageObject.getChildren()[index], nextStep: this.stepsImageObject.getChildren()[index] })
+                nextStepPositionX = this.stepsImageObject.getChildren()[index].x
+                this.stepsImageObject.getChildren()[index].setX(positionX)
+                positionX = nextStepPositionX
+              }
+            }
+            console.log("stepsImageObject after delete step ", {
+              stepsImageObject: this.stepsImageObject.getChildren(),
+            });
+          })
+          .on("pointerover", () => {
+            stepImageObject.setTint(0xfff000);
+          }).on("pointerout", () => {
+            stepImageObject.setTint();
+          })
+          .setInteractive();
+        } else {
+          alert("Você atingiu o número máximo de movimentos.")
+        }
       }
     })
 
@@ -164,47 +173,57 @@ export default class MainMenuScene extends Phaser.Scene {
           const lastStep = this.stepsImageObject.getChildren().slice(-1)[0]
           x = lastStep.x + iconArrowDown.displayWidth;
         }
-  
-        let stepImageObject = this.add
-          .image(x, zone.y, iconArrowDown.texture.key)
-          .setScale(scaleButton).setOrigin(0, -0.1)
-  
-        this.steps.push(iconArrowDown.name);
-        // this.stepsImageObject.add(stepImageObject.getChildren())
-        this.stepsImageObject.add(stepImageObject);
-        this.stepsCount.changeValue('INCREASE', 1)
+        
+        if(this.stepsImageObject.getChildren().length < this.game.maxSteps) {
+          let stepImageObject = this.add
+            .image(x, zone.y, iconArrowDown.texture.key)
+            .setScale(scaleButton).setOrigin(0, -0.1)
+    
+          this.steps.push(iconArrowDown.name);
+          // this.stepsImageObject.add(stepImageObject.getChildren())
+          this.stepsImageObject.add(stepImageObject);
+          this.stepsCount.changeValue('INCREASE', 1)
 
-        console.log("stepsImageObject after add step ", {
-          stepsImageObject: this.stepsImageObject.getChildren(),
-        });
-        stepImageObject.on("pointerdown", (event) => {
-          console.log({event, stepImageObject});
-          //  Then destroy it. This will fire a 'destroy' event that the Group will hear
-          //  and then it'll automatically remove itself from the Group.
-          console.log("stepsImageObject before delete step ", {
-            stepImageObject: this.stepsImageObject.getChildren(),
-          });
-          const indexStepDestroy = this.stepsImageObject.getChildren().findIndex(step => step.x === stepImageObject.x)
-          console.log({indexStepDestroy})
-          let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
-          let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
-          stepImageObject.destroy();
-          this.stepsCount.changeValue('DECREASE', 1)
-
-          for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
-            if(this.stepsImageObject.getChildren()[index])
-            {
-              console.log({ actualStep: this.stepsImageObject.getChildren()[index], nextStep: this.stepsImageObject.getChildren()[index] })
-              nextStepPositionX = this.stepsImageObject.getChildren()[index].x
-              this.stepsImageObject.getChildren()[index].setX(positionX)
-              positionX = nextStepPositionX
-            }
-          }
-          console.log("stepsImageObject after delete step ", {
+          console.log("stepsImageObject after add step ", {
             stepsImageObject: this.stepsImageObject.getChildren(),
           });
-        })
-        .setInteractive();
+          stepImageObject.on("pointerdown", (event) => {
+            console.log({event, stepImageObject});
+            //  Then destroy it. This will fire a 'destroy' event that the Group will hear
+            //  and then it'll automatically remove itself from the Group.
+            console.log("stepsImageObject before delete step ", {
+              stepImageObject: this.stepsImageObject.getChildren(),
+            });
+            const indexStepDestroy = this.stepsImageObject.getChildren().findIndex(step => step.x === stepImageObject.x)
+            console.log({indexStepDestroy})
+            let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
+            let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
+            stepImageObject.destroy();
+            this.stepsCount.changeValue('DECREASE', 1)
+
+            for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
+              if(this.stepsImageObject.getChildren()[index])
+              {
+                console.log({ actualStep: this.stepsImageObject.getChildren()[index], nextStep: this.stepsImageObject.getChildren()[index] })
+                nextStepPositionX = this.stepsImageObject.getChildren()[index].x
+                this.stepsImageObject.getChildren()[index].setX(positionX)
+                positionX = nextStepPositionX
+              }
+            }
+            console.log("stepsImageObject after delete step ", {
+              stepsImageObject: this.stepsImageObject.getChildren(),
+            });
+          })
+          .on("pointerover", () => {
+            stepImageObject.setTint(0xfff000);
+          }).on("pointerout", () => {
+            stepImageObject.setTint();
+          })
+          .setInteractive();
+        }  else {
+          alert("Você atingiu o número máximo de movimentos.")
+        }
+
       }
     })
 
@@ -228,6 +247,7 @@ export default class MainMenuScene extends Phaser.Scene {
           const lastStep = this.stepsImageObject.getChildren().slice(-1)[0]
           x = lastStep.x + iconArrowLeft.displayWidth;
         }
+        if(this.stepsImageObject.getChildren().length < this.game.maxSteps) {
   
         let stepImageObject = this.add
           .image(x, zone.y, iconArrowLeft.texture.key)
@@ -268,7 +288,15 @@ export default class MainMenuScene extends Phaser.Scene {
             stepsImageObject: this.stepsImageObject.getChildren(),
           });
         })
+        .on("pointerover", () => {
+            stepImageObject.setTint(0xfff000);
+          }).on("pointerout", () => {
+            stepImageObject.setTint();
+          })
         .setInteractive();
+        }  else {
+          alert("Você atingiu o número máximo de movimentos.")
+        }
       }
     })
 
@@ -292,47 +320,56 @@ export default class MainMenuScene extends Phaser.Scene {
           const lastStep = this.stepsImageObject.getChildren().slice(-1)[0]
           x = lastStep.x + iconArrowRight.displayWidth;
         }
-  
-        let stepImageObject = this.add
-          .image(x, zone.y, iconArrowRight.texture.key)
-          .setScale(scaleButton).setOrigin(0, -0.1)
-  
-        this.steps.push(iconArrowRight.name);
-        // this.stepsImageObject.add(stepImageObject.getChildren())
-        this.stepsImageObject.add(stepImageObject);
-        this.stepsCount.changeValue('INCREASE', 1)
+        if(this.stepsImageObject.getChildren().length < this.game.maxSteps) {
+          
+          let stepImageObject = this.add
+            .image(x, zone.y, iconArrowRight.texture.key)
+            .setScale(scaleButton).setOrigin(0, -0.1)
+    
+          this.steps.push(iconArrowRight.name);
+          // this.stepsImageObject.add(stepImageObject.getChildren())
+          this.stepsImageObject.add(stepImageObject);
+          this.stepsCount.changeValue('INCREASE', 1)
 
-        console.log("stepsImageObject after add step ", {
-          stepsImageObject: this.stepsImageObject.getChildren(),
-        });
-        stepImageObject.on("pointerdown", (event) => {
-          console.log({event, stepImageObject});
-          //  Then destroy it. This will fire a 'destroy' event that the Group will hear
-          //  and then it'll automatically remove itself from the Group.
-          console.log("stepsImageObject before delete step ", {
-            stepImageObject: this.stepsImageObject.getChildren(),
-          });
-          const indexStepDestroy = this.stepsImageObject.getChildren().findIndex(step => step.x === stepImageObject.x)
-          console.log({indexStepDestroy})
-          let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
-          let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
-          stepImageObject.destroy();
-          this.stepsCount.changeValue('DECREASE', 1)
-
-          for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
-            if(this.stepsImageObject.getChildren()[index])
-            {
-              console.log({ actualStep: this.stepsImageObject.getChildren()[index], nextStep: this.stepsImageObject.getChildren()[index] })
-              nextStepPositionX = this.stepsImageObject.getChildren()[index].x
-              this.stepsImageObject.getChildren()[index].setX(positionX)
-              positionX = nextStepPositionX
-            }
-          }
-          console.log("stepsImageObject after delete step ", {
+          console.log("stepsImageObject after add step ", {
             stepsImageObject: this.stepsImageObject.getChildren(),
           });
-        })
-        .setInteractive();
+          stepImageObject.on("pointerdown", (event) => {
+            console.log({event, stepImageObject});
+            //  Then destroy it. This will fire a 'destroy' event that the Group will hear
+            //  and then it'll automatically remove itself from the Group.
+            console.log("stepsImageObject before delete step ", {
+              stepImageObject: this.stepsImageObject.getChildren(),
+            });
+            const indexStepDestroy = this.stepsImageObject.getChildren().findIndex(step => step.x === stepImageObject.x)
+            console.log({indexStepDestroy})
+            let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
+            let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
+            stepImageObject.destroy();
+            this.stepsCount.changeValue('DECREASE', 1)
+
+            for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
+              if(this.stepsImageObject.getChildren()[index])
+              {
+                console.log({ actualStep: this.stepsImageObject.getChildren()[index], nextStep: this.stepsImageObject.getChildren()[index] })
+                nextStepPositionX = this.stepsImageObject.getChildren()[index].x
+                this.stepsImageObject.getChildren()[index].setX(positionX)
+                positionX = nextStepPositionX
+              }
+            }
+            console.log("stepsImageObject after delete step ", {
+              stepsImageObject: this.stepsImageObject.getChildren(),
+            });
+          })
+          .on("pointerover", () => {
+            stepImageObject.setTint(0xfff000);
+          }).on("pointerout", () => {
+            stepImageObject.setTint();
+          })
+          .setInteractive();
+        }  else {
+          alert("Você atingiu o número máximo de movimentos.")
+        }
       }
     })
 
@@ -454,51 +491,54 @@ export default class MainMenuScene extends Phaser.Scene {
 
       // gameObject.input.enabled = false;
       // const container = this.add.container(20, 50, [iconArrowUp, iconArrowDown, iconArrowLeft, iconArrowRight]).add
+        if(this.stepsImageObject.getChildren().length < this.game.maxSteps) {
+          let stepImageObject = this.add
+            .image(x, dropZone.y, gameObject.texture.key)
+            .setScale(scaleButton).setOrigin(0, -0.1)
 
-      let stepImageObject = this.add
-        .image(x, dropZone.y, gameObject.texture.key)
-        .setScale(scaleButton).setOrigin(0, -0.1)
+          this.steps.push(gameObject.name);
+          // this.stepsImageObject.add(stepImageObject.getChildren())
+          this.stepsImageObject.add(stepImageObject);
+          this.stepsCount.changeValue('INCREASE', 1)
 
-      this.steps.push(gameObject.name);
-      // this.stepsImageObject.add(stepImageObject.getChildren())
-      this.stepsImageObject.add(stepImageObject);
-      this.stepsCount.changeValue('INCREASE', 1)
+          console.log("stepsImageObject after add step ", {
+            stepsImageObject: this.stepsImageObject.getChildren(),
+          });
+          stepImageObject.on("pointerover", () => {
+            stepImageObject.setTint(0xfff000);
+          }).on("pointerout", () => {
+            stepImageObject.setTint();
+          }).on("pointerdown", (event) => {
+            console.log({event, stepImageObject});
+            //  Then destroy it. This will fire a 'destroy' event that the Group will hear
+            //  and then it'll automatically remove itself from the Group.
+            console.log("stepsImageObject before delete step ", {
+              stepImageObject: this.stepsImageObject.getChildren(),
+            });
+            const indexStepDestroy = this.stepsImageObject.getChildren().findIndex(step => step.x === stepImageObject.x)
+            console.log({indexStepDestroy})
+            let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
+            let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
+            stepImageObject.destroy();
+            this.stepsCount.changeValue('DECREASE', 1)
 
-      console.log("stepsImageObject after add step ", {
-        stepsImageObject: this.stepsImageObject.getChildren(),
-      });
-      stepImageObject.on("pointerover", () => {
-        stepImageObject.setTint(0xfff000);
-      }).on("pointerout", () => {
-        stepImageObject.setTint();
-      }).on("pointerdown", (event) => {
-        console.log({event, stepImageObject});
-        //  Then destroy it. This will fire a 'destroy' event that the Group will hear
-        //  and then it'll automatically remove itself from the Group.
-        console.log("stepsImageObject before delete step ", {
-          stepImageObject: this.stepsImageObject.getChildren(),
-        });
-        const indexStepDestroy = this.stepsImageObject.getChildren().findIndex(step => step.x === stepImageObject.x)
-        console.log({indexStepDestroy})
-        let positionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
-        let nextStepPositionX = this.stepsImageObject.getChildren()[indexStepDestroy].x;
-        stepImageObject.destroy();
-        this.stepsCount.changeValue('DECREASE', 1)
-
-        for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
-          if(this.stepsImageObject.getChildren()[index])
-          {
-            console.log({ actualStep: this.stepsImageObject.getChildren()[index], nextStep: this.stepsImageObject.getChildren()[index] })
-            nextStepPositionX = this.stepsImageObject.getChildren()[index].x
-            this.stepsImageObject.getChildren()[index].setX(positionX)
-            positionX = nextStepPositionX
-          }
+            for (let index = indexStepDestroy; index < this.stepsImageObject.getChildren().length; index++) {
+              if(this.stepsImageObject.getChildren()[index])
+              {
+                console.log({ actualStep: this.stepsImageObject.getChildren()[index], nextStep: this.stepsImageObject.getChildren()[index] })
+                nextStepPositionX = this.stepsImageObject.getChildren()[index].x
+                this.stepsImageObject.getChildren()[index].setX(positionX)
+                positionX = nextStepPositionX
+              }
+            }
+            console.log("stepsImageObject after delete step ", {
+              stepsImageObject: this.stepsImageObject.getChildren(),
+            });
+          })
+          .setInteractive();
+        }  else {
+          alert("Você atingiu o número máximo de movimentos.")
         }
-        console.log("stepsImageObject after delete step ", {
-          stepsImageObject: this.stepsImageObject.getChildren(),
-        });
-      })
-      .setInteractive();
       zoneImage.clearTint()
     });
 
