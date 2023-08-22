@@ -96,7 +96,7 @@ export default class UIScene extends Phaser.Scene {
         this,
         this.game.scale.width / 2,
         this.game.scale.height * 0.4,
-        `PARABÉNS! VOCÊ COMPLETOU O NÍVEL ${level}!`
+        Number(this.game.level) === 5 ? `PARABÉNS! VOCÊ COMPLETOU TODOS OS NÍVEIS` : `PARABÉNS! VOCÊ COMPLETOU O NÍVEL ${level}!`
       )
       .setAlign('center')
       .setColor('#ffffff')
@@ -107,20 +107,23 @@ export default class UIScene extends Phaser.Scene {
         this.game.scale.height * 0.4,
       ).setOrigin(0, 0.75)
 
-      this.gameEndPhase2 = new Text(
-        this,
-        this.game.scale.width / 2,
-        this.game.scale.height * 0.4,
-        `CLIQUE PARA INICIAR O NÍVEL ${Number(level) + 1}`
-      )
-      .setAlign('center')
-      .setColor('#ffffff')
-      .setLineSpacing(0)
+      if(Number(this.game.level) !== 5) {
+        this.gameEndPhase2 = new Text(
+          this,
+          this.game.scale.width / 2,
+          this.game.scale.height * 0.4,
+          `CLIQUE PARA INICIAR O NÍVEL ${Number(level) + 1}`
+        )
+        .setAlign('center')
+        .setColor('#ffffff')
+        .setLineSpacing(0)
+  
+        this.gameEndPhase2.setPosition(
+          this.game.scale.width / 2 - this.gameEndPhase2.width / 2,
+          this.game.scale.height * 0.4 + 30,
+        ).setOrigin(0, 0.75)
+      }
 
-      this.gameEndPhase2.setPosition(
-        this.game.scale.width / 2 - this.gameEndPhase2.width / 2,
-        this.game.scale.height * 0.4 + 30,
-      ).setOrigin(0, 0.75)
     }
 
     this.game.scene.pause(`level-${Number(level)}-scene`)
